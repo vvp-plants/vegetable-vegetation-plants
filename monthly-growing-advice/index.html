@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VVP - Monthly Growing Advice</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f3f6;
+      color: #111;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      z-index: 1000;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 0;
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* Buttons */
+    .top-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .large-button {
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.12s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      display: inline-block;
+    }
+
+    .large-button:hover {
+      background-color: #004F00;
+      transform: translateY(-2px);
+    }
+
+    /* Layout */
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .side-news .card {
+      margin-bottom: 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+      .logo {
+        display: none;
+      }
+      .large-button {
+        padding: 12px 18px;
+        font-size: 16px;
+      }
+    }
+
+    .center-wrapper {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a class="logo" href="#">VVP</a>
+
+      <nav class="top-buttons">
+        <a href="index.html" class="large-button">HOME</a>
+        <a href="plants.html" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main>
+    <div class="container">
+
+      <!-- MAIN CONTENT -->
+      <section>
+
+        <!-- Month 1 -->
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Spring garden">
+          <div class="card-content">
+            <h1>July Growing Advice</h1>
+            <p>July is warm, bright, and perfect for fast-growing vegetables and flowers. Keep plants well-watered and mulch beds to retain moisture.</p>
+            <ul>
+              <li>Water early in the morning</li>
+              <li>Harvest courgettes regularly</li>
+              <li>Pinch out tomato side shoots</li>
+              <li>Deadhead flowers to encourage more blooms</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Month 2 -->
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Summer plants">
+          <div class="card-content">
+            <h1>August Growing Advice</h1>
+            <p>August is peak harvest time. Keep feeding fruiting plants and prepare beds for autumn crops.</p>
+            <ul>
+              <li>Feed tomatoes and peppers weekly</li>
+              <li>Plant autumn salads</li>
+              <li>Collect seeds from flowers</li>
+              <li>Trim lavender after flowering</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Month 3 -->
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Autumn garden">
+          <div class="card-content">
+            <h1>September Growing Advice</h1>
+            <p>As temperatures cool, prepare your garden for autumn growth and winter protection.</p>
+            <ul>
+              <li>Plant spring bulbs</li>
+              <li>Start winter lettuce</li>
+              <li>Cut back perennials</li>
+              <li>Clear fallen leaves</li>
+            </ul>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="side-news">
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Tools">
+          <div class="card-content">
+            <h3>Top Tip</h3>
+            <p>Water deeply once or twice a week instead of little and often.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Garden soil">
+          <div class="card-content">
+            <h3>Soil Health</h3>
+            <p>Add compost every month to keep soil rich and full of nutrients.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Wildlife">
+          <div class="card-content">
+            <h3>Wildlife Friendly</h3>
+            <p>Leave a small patch of your garden wild to help insects thrive.</p>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- Back to top button -->
+    <div class="center-wrapper">
+      <a href="#top" class="large-button">Back To The Top</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
