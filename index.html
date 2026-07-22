@@ -8,6 +8,10 @@
   <style>
     * { box-sizing: border-box; }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
@@ -67,6 +71,7 @@
       text-decoration: none;
       transition: background-color 0.25s ease, transform 0.12s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      display: inline-block;
     }
 
     .large-button:hover {
@@ -129,6 +134,12 @@
         font-size: 16px;
       }
     }
+
+    /* Center wrapper replacement */
+    .center-wrapper {
+      text-align: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -154,7 +165,7 @@
       <!-- MAIN CARD 1 -->
       <a href="discount-JUNE-2026.html">
         <article class="card">
-          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Plants and offers">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Green plants with discount offer">
           <div class="card-content">
             <h1>10% off your first order</h1>
             <p>Claim your discount code here</p>
@@ -165,7 +176,7 @@
       <!-- MAIN CARD 2 -->
       <a href="https://www.gardenersworld.com/make-a-metre-matter/pledge-to-win">
         <article class="card">
-          <img src="https://images.immediate.co.uk/production/volatile/sites/10/2026/05/GW-brandsite-article-hero-thumb-900x600-a96525e.jpg?quality=90&resize=900,600" alt="Make a metre matter">
+          <img src="https://images.immediate.co.uk/production/volatile/sites/10/2026/05/GW-brandsite-article-hero-thumb-900x600-a96525e.jpg?quality=90&resize=900,600" alt="Make a metre matter campaign">
           <div class="card-content">
             <h1>Make a metre matter</h1>
             <p>Transform a metre for the good of the planet and be entered into our prize draw.</p>
@@ -176,7 +187,7 @@
       <!-- MAIN CARD 3 -->
       <a href="wild flower.html">
         <article class="card">
-          <img src="https://wallpapercave.com/wp/wp2093971.jpg" alt="Grow wild">
+          <img src="https://wallpapercave.com/wp/wp2093971.jpg" alt="Wildflower garden">
           <div class="card-content">
             <h1>Grow wild</h1>
             <p>Transform your garden into a wild haven for insects and bugs!</p>
@@ -187,7 +198,7 @@
       <!-- MAIN CARD 4 -->
       <a href="#">
         <article class="card">
-          <img src="https://images.immediate.co.uk/production/volatile/sites/10/2018/02/2d3068de-2bbd-4d48-b624-44b598597ed2-50372f6.jpg?quality=90&webp=true&fit=750,500" alt="Advice">
+          <img src="https://images.immediate.co.uk/production/volatile/sites/10/2018/02/2d3068de-2bbd-4d48-b624-44b598597ed2-50372f6.jpg?quality=90&webp=true&fit=750,500" alt="Gardening advice">
           <div class="card-content">
             <h3>Advice</h3>
             <p>Your monthly growing advice</p>
@@ -200,7 +211,7 @@
 
         <a href="monthly delvery box.html">
           <div class="card">
-            <img src="https://thehappypear.ie/wp-content/uploads/2023/04/farmvegbox-large.webp" alt="Monthly plant delivery">
+            <img src="https://thehappypear.ie/wp-content/uploads/2023/04/farmvegbox-large.webp" alt="Monthly plant delivery box">
             <div class="card-content">
               <h3>Monthly plant delivery box</h3>
               <p>Subscribe for fresh plants delivered monthly</p>
@@ -210,7 +221,7 @@
 
         <a href="shop.html">
           <div class="card">
-            <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Order a plant">
+            <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Order a plant online">
             <div class="card-content">
               <h3>Order a plant</h3>
               <p>Buy plants delivered straight to your door</p>
@@ -218,7 +229,6 @@
           </div>
         </a>
 
-        <!-- SOUTHPORT FLOWER SHOW — now correctly in sidebar -->
         <a href="https://www.gardenersworld.com/win/win-tickets-to-southport-flower-show-2026/">
           <article class="card">
             <img src="https://images.immediate.co.uk/production/volatile/sites/10/2026/06/2048x1365SouthportFlowerShow-c7733b9.png?quality=90&webp=true&resize=940,627" alt="Southport Flower Show 2026">
@@ -230,11 +240,14 @@
         </a>
 
       </aside>
-      <center>
-          <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/" class="large-button">Back To The Top</a>
-      </center>
 
     </div>
+
+    <!-- Back to top button -->
+    <div class="center-wrapper">
+      <a href="#top" class="large-button">Back To The Top</a>
+    </div>
+
   </main>
 
 </body>
