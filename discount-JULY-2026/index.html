@@ -6,6 +6,59 @@
   <title>VVP Secure Discount Code</title>
 
   <style>
+        /* Top bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      z-index: 1000;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 0;
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+        /* Buttons */
+    .top-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .large-button {
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.12s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      display: inline-block;
+    }
     body {
       font-family: "Segoe UI", Arial, sans-serif;
       background: #f1f3f6;
