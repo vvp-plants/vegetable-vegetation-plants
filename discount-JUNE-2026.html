@@ -1,12 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vegetable, vegetation, & plants discount code</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VVP Secure Discount Code</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f3f6;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+      color: #111;
+    }
+
+    .secure-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 550px;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .warning {
+      background: #ffe9c4;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 15px;
+      border-left: 4px solid #ff9900;
+    }
+
+    .reveal-btn, .copy-btn {
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.12s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      display: inline-block;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .reveal-btn:hover, .copy-btn:hover {
+      background-color: #004F00;
+      transform: translateY(-2px);
+    }
+
+    .discount-code {
+      font-size: 28px;
+      font-weight: bold;
+      color: #004F00;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .copy-btn {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
 <body>
 
-<h1>hello code:1234567789<h1>
+  <div class="secure-box">
+    <h1>Secure Discount Code</h1>
+
+    <div class="warning">
+      This discount code is hidden for security.  
+      Click **Reveal Code** to view it once.
+    </div>
+
+    <button class="reveal-btn" onclick="revealCode()">Reveal Code</button>
+
+    <div id="code" class="discount-code">1234567789</div>
+
+    <button id="copyBtn" class="copy-btn" onclick="copyCode()">Copy Code</button>
+  </div>
+
+  <script>
+    function revealCode() {
+      document.getElementById("code").style.display = "block";
+      document.getElementById("copyBtn").style.display = "inline-block";
+    }
+
+    function copyCode() {
+      const codeText = document.getElementById("code").innerText;
+      navigator.clipboard.writeText(codeText);
+      alert("Code copied!");
+    }
+  </script>
 
 </body>
 </html>
