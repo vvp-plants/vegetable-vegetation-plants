@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VVP - Contact Us</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #0E3612;
+      color: #111;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      z-index: 1000;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 0;
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .large-button {
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.12s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    }
+
+    .large-button:hover {
+      background-color: #004F00;
+      transform: translateY(-2px);
+    }
+
+    /* Contact container */
+    .contact-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0E3612;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    /* Form */
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      padding: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      background: #004F00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.12s ease;
+    }
+
+    button:hover {
+      background: #007700;
+      transform: translateY(-2px);
+    }
+
+    /* Contact info box */
+    .info-box {
+      margin-top: 40px;
+      padding: 20px;
+      background: #f3f3f3;
+      border-radius: 10px;
+    }
+
+    .info-box h2 {
+      margin-top: 0;
+      color: #0E3612;
+    }
+
+    .info-box p {
+      text-align: left;
+      margin: 8px 0;
+    }
+
+    @media (max-width: 600px) {
+      .contact-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a class="logo" href="https://djhpsawse.github.io/vegetable-vegetation-plants/">VVP</a>
+
+      <nav class="top-buttons">
+        <a href="index.html" class="large-button">VVP</a>
+        <a href="plants.html" class="large-button">PLANTS</a>
+        <a href="contact.html" class="large-button">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contact content -->
+  <div class="contact-container">
+    <h1>Contact Us</h1>
+    <p>Have a question, suggestion, or need help? Send us a message below.</p>
+
+   <section class="contact">
+    <h2>Contact Us</h2>
+    <p>Send Us A Message And We Will Get Back To You Soon</p>
+
+    <form action="https://formsubmit.co/harryprior@btinternet.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+      <!-- FormSubmit settings -->
+      <input type="hidden" name="_subject" value="New message from VVP">
+      <input type="hidden" name="_captcha" value="false">
+
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+  </div>
+
+</body>
+</html>
