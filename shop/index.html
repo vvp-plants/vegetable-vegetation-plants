@@ -1,262 +1,343 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VVP - Seed Starter Gift Kits</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vegetable, Vegetation &amp; Plants – Stock</title>
 
   <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #0E3612;
-      color: #111;
+    :root{
+      --green:#3a7d44;
+      --dark:#2f5f35;
+      --bg:#f4f9f4;
+      --danger:#d62828;
+      --warn:#f4a261;
+      --ink:#17301a;
     }
 
-    /* Top bar */
-    .top-bar {
-      position: sticky;
-      top: 0;
-      background: #111;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 20px;
-      z-index: 1000;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg);
+      color:var(--ink);
     }
 
-    .top-bar-inner {
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+    header{
+      background:var(--green);
+      color:#fff;
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    header h2{margin:0;font-size:18px}
+
+    .pill, .order-button{
+      background:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:800;
+      border:none;
+      text-decoration:none;
+      color:#333;
+      cursor:pointer;
+    }
+    .order-button:hover{filter:brightness(.95)}
+
+    .hero{
+      padding:48px 18px;
+      text-align:center;
+      color:#fff;
+      background:url("https://raw.githubusercontent.com/djhpsawse/vegetable-vegetation-plants/main/Designer.png") center/cover;
+    }
+    .hero h1{margin:0;font-size:34px;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+    .hero p{margin:10px 0 0;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:18px;
+    }
+    input,select,textarea{
+      padding:10px;
+      border-radius:12px;
+      border:1px solid #cfd9cf;
+      font-size:16px;
+      background:#fff;
     }
 
-    .logo {
-      position: absolute;
-      left: 0;
-      background: white;
-      color: black;
-      font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 6px;
-      text-decoration: none;
+    .categories{padding:0 18px 10px}
+    .categories button{
+      margin:5px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid var(--green);
+      background:#fff;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .categories .active{background:var(--green);color:#fff}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+      padding:18px;
     }
 
-    .top-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
+    .card{
+      background:#fff;
+      border-radius:18px;
+      padding:14px;
+      text-align:center;
+      box-shadow:0 6px 18px rgba(0,0,0,.10);
+      position:relative;
+    }
+    .card img{
+      width:100%;
+      height:155px;
+      object-fit:cover;
+      border-radius:12px;
+      background:#eef4ee;
     }
 
-    .large-button {
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: 700;
-      color: white;
-      background-color: #111;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background-color 0.25s ease, transform 0.12s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    .stock-badge{
+      position:absolute;
+      top:12px;
+      left:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      color:#fff;
+      font-size:12px;
+      font-weight:800;
+    }
+    .out{background:var(--danger)}
+    .low{background:var(--warn);color:#2d1b00}
+
+    .btn{
+      padding:10px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      width:100%;
+      font-weight:800;
+      margin-top:8px;
+    }
+    .dark{background:var(--dark);color:#fff}
+    .grey{background:#ddd}
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:50;
+    }
+    .modal-content{
+      background:#fff;
+      padding:16px;
+      border-radius:18px;
+      width:100%;
+      max-width:520px;
+      max-height:85vh;
+      overflow:auto;
     }
 
-    .large-button:hover {
-      background-color: #004F00;
-      transform: translateY(-2px);
+    .admin{display:none;padding:18px}
+    .panel{
+      background:#fff;
+      border-radius:18px;
+      padding:14px;
+      box-shadow:0 6px 18px rgba(0,0,0,.10);
     }
-
-    /* Shop grid */
-    .shop-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+    .admin-list-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #eee;
+      padding:10px 0;
+      gap:10px;
     }
-
-    .product-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .product-content {
-      padding: 20px;
-    }
-
-    .product-content h2 {
-      margin: 0 0 10px;
-      color: #0E3612;
-    }
-
-    .product-content p {
-      margin: 0 0 10px;
-      font-size: 16px;
-    }
-
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-      color: #004F00;
-      margin-bottom: 12px;
-    }
-
-    .buy-button {
-      display: inline-block;
-      padding: 10px 18px;
-      background: #004F00;
-      color: white;
-      border-radius: 6px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: 0.25s;
-    }
-
-    .buy-button:hover {
-      background: #007700;
-      transform: translateY(-2px);
-    }
-
-    .tag {
-      background: #004F00;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: bold;
-      display: inline-block;
-      margin-bottom: 10px;
+    .admin-list-item button{
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid #cfe2cf;
+      background:#fff;
+      cursor:pointer;
+      font-weight:800;
     }
   </style>
 </head>
 
 <body>
-
-  <!-- Top bar -->
-  <header class="top-bar">
-    <div class="top-bar-inner">
-      <a class="logo" href="index.html">VVP</a>
-
-      <nav class="top-buttons">
-        <a href="index.html" class="large-button">VVP</a>
-        <a href="plants.html" class="large-button">PLANTS</a>
-        <a href="offers.html" class="large-button">OFFERS</a>
-        <a href="shop.html" class="large-button">SHOP</a>
-        <a href="contact.html" class="large-button">CONTACT</a>
-      </nav>
-    </div>
+  <header>
+    <h2>Vegetable, Vegetation &amp; Plants</h2>
   </header>
 
-  <!-- Shop grid -->
-  <div class="shop-container">
-
-    <!-- Standard Edition -->
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Standard Seed Starter Kit">
-      <div class="product-content">
-        <span class="tag">STANDARD</span>
-        <h2>Pocket Grow Kit — Seed Starter Gift Box</h2>
-        <p>Includes 10 seeds, 5 coir discs, 5 pots, and a beginner-friendly brochure.</p>
-        <div class="price">£12.99</div>
-        <a href="#" class="buy-button">Buy Now</a>
-      </div>
+  <div id="shop">
+    <div class="controls">
+      <input id="search" placeholder="Search plants..." />
+      <select id="sort">
+      </select>
     </div>
 
-    <!-- Seasonal Editions -->
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Christmas Kit">
-      <div class="product-content">
-        <span class="tag">SEASONAL</span>
-        <h2>Merry & Bright — Christmas Kitchen Garden</h2>
-        <p>Rosemary, thyme, basil + candy canes, ribbon, and festive kraft packaging.</p>
-        <div class="price">£15.99</div>
-        <a href="#" class="buy-button">Buy Now</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1523475496153-3d6cc0c0f1d1" alt="Spring Kit">
-      <div class="product-content">
-        <span class="tag">SEASONAL</span>
-        <h2>Hello Spring — Little Bloom Box</h2>
-        <p>Wildflowers, daisies, forget‑me‑nots + pastel ribbon and Easter extras.</p>
-        <div class="price">£15.99</div>
-        <a href="#" class="buy-button">Buy Now</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Mother's Day Kit">
-      <div class="product-content">
-        <span class="tag">SEASONAL</span>
-        <h2>Mum’s Little Garden — Mother’s Day Edition</h2>
-        <p>Lavender, chamomile, sweet pea + “For Mum” card and floral packaging.</p>
-        <div class="price">£16.99</div>
-        <a href="#" class="buy-button">Buy Now</a>
-      </div>
-    </div>
-
-    <!-- Premium Edition -->
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1589927986089-35812386e0c1" alt="Premium Kit">
-      <div class="product-content">
-        <span class="tag">PREMIUM</span>
-        <h2>The Windowsill Garden Kit — Premium Edition</h2>
-        <p>Personalised message + plant markers, ribbon, upgraded packaging.</p>
-        <div class="price">£19.99</div>
-        <a href="#" class="buy-button">Buy Now</a>
-      </div>
-    </div>
-
-    <!-- Bee Friendly -->
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Bee Friendly Kit">
-      <div class="product-content">
-        <span class="tag">SEASONAL</span>
-        <h2>Bee Kind — Save the Bees Kit</h2>
-        <p>Pollinator mix + bee-friendly guide + eco packaging.</p>
-        <div class="price">£15.99</div>
-        <a href="#" class="buy-button">Buy Now</a>
-      </div>
-    </div>
-
-    <!-- Mystery Box -->
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Mystery Box">
-      <div class="product-content">
-        <span class="tag">FUN EDITION</span>
-        <h2>Surprise Grow Kit — Mystery Garden Box</h2>
-        <p>Mixed seeds + mystery reveal card + playful packaging.</p>
-        <div class="price">£14.99</div>
-        <a href="#" class="buy-button">Buy Now</a>
-      </div>
-    </div>
-
+    <div class="categories" id="cats"></div>
+    <div class="grid" id="grid"></div>
   </div>
 
+    <div class="panel">
+      <input id="n" placeholder="Name" />
+      <input id="p" placeholder="Price (£)" type="number" step="0.01" />
+      <input id="c" placeholder="Category" />
+      <input id="s" placeholder="Stock" type="number" />
+      <input id="i" placeholder="Image URL" />
+      <textarea id="d" placeholder="Description" rows="3"></textarea>
+
+      <button class="btn dark" type="button" onclick="addProduct()">Add Product</button>
+      <div id="adminProductList"></div>
+    </div>
+
+    <button class="btn grey" type="button" onclick="logout()">Exit Admin</button>
+  </div>
+
+  <div class="modal" id="productModal"
+       onclick="if(event.target.id==='productModal') this.style.display='none'">
+    <div class="modal-content" id="productModalContent"></div>
+  </div>
+
+  <script>
+    // ===== Settings =====
+    const PASS = "admin123";                // demo-only (client side)
+    const KEY  = "plants_products_stock";   // localStorage key
+
+    // ===== Default data =====
+    const defaults = [
+      {id:1,  name:"rocket (cultivated)",          price:2.00, category:"Salad",      stock:10, image:"https://premierseedsdirect.com/wp-content/uploads/2017/12/Rocket-Cultivated-2-021225-iStock-SQ-PS-1024x1024.jpg", desc:"Peppery salad leaf. Quick to grow."},
+      {id:2,  name:"red lettuce (salad bowl)",     price:2.50, category:"Salad",      stock:10, image:"https://www.harrisseeds.com/cdn/shop/files/01527_900x.jpg?v=1736905903", desc:"Loose-leaf lettuce with rich colour."},
+      {id:3,  name:"carrot (Nantes 2)",            price:3.50, category:"Roots",      stock:10, image:"https://gardenerspath.com/wp-content/uploads/2025/01/Carrots-Ready-to-Harvest-in-the-Garden-2.jpg", desc:"Sweet carrots, great for early harvest."},
+      {id:4,  name:"tomato (agura)",               price:2.00, category:"Salad",      stock:10, image:"https://media.istockphoto.com/id/512694992/photo/young-tomato-plant-growing-tomato-in-garden.jpg?s=170667a&w=0&k=20&c=2uXN2qMYOR1ZIuG1lQYFQZyGTN4CTLzaPHSL16JCsXY=", desc:"Strong tomato plant starter."},
+      {id:5,  name:"spinach (perpetual)",          price:2.50, category:"Salad",      stock:10, image:"https://premierseedsdirect.com/wp-content/uploads/2017/02/41579623-2.jpg", desc:"Harvest again and again."},
+      {id:6,  name:"tomato (idyll)",               price:2.50, category:"Salad",      stock:10, image:"https://www.jungepflanzen.de/media/5d/2c/99/1701199480/solanum_lycopersicum_idyll_1.jpg?ts=1701199480", desc:"Reliable tomato variety for the garden."},
+      {id:7,  name:"chives",                       price:2.00, category:"Herbs",      stock:10, image:"https://images.unsplash.com/photo-1524592911903-1f3b0b5a59f5?auto=format&fit=crop&w=1200&q=60", desc:"Great for salads and garnish."},
+      {id:8,  name:"sorrel (garden)",              price:2.50, category:"Herbs",      stock:10, image:"https://www.epicgardening.com/wp-content/uploads/2023/02/sorrel-plant-1200x667.jpeg", desc:"Lemony leaf – perfect in soups."},
+      {id:9,  name:"cauliflower (all season)",     price:2.50, category:"Salad",      stock:10, image:"https://growplant.org/wp-content/uploads/2024/11/cauliflower-life-cycle-2.jpg", desc:"All-season cauliflower starter."},
+      {id:10, name:"french bean (Ferrari)",        price:2.00, category:"Beans",      stock:10, image:"https://tse1.mm.bing.net/th/id/OIP.NJpdve2n7PrUuPxgwucMTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3&adlt=strict", desc:"Productive bean variety."},
+      {id:11, name:"broccoli (Calabrese)",         price:2.50, category:"Salad",      stock:10, image:"https://cdn.mos.cms.futurecdn.net/nKLHEVorF7WApKVeKUrr7C-690-80.jpg", desc:"Classic broccoli type."},
+      {id:12, name:"beetroot (Detroit)",           price:2.00, category:"Roots",      stock:10, image:"https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1200&q=60", desc:"Great for roasting and salads."},
+      {id:13, name:"swiss chard (mixed)",          price:3.00, category:"Salad",      stock:10, image:"https://images.unsplash.com/photo-1584270354949-1f5a3a8f1e3b?auto=format&fit=crop&w=1200&q=60", desc:"Colourful stems, easy to grow."},
+      {id:14, name:"carrot (Cosmic purple)",       price:2.50, category:"Roots",      stock:10, image:"https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=1200&q=60", desc:"Purple carrot – eye-catching and tasty."},
+      {id:15, name:"curly kale (Nero Di Toscana)", price:3.00, category:"Salad",      stock:10, image:"https://images.unsplash.com/photo-1587049352846-4a1a278e6b76?auto=format&fit=crop&w=1200&q=60", desc:"Hardy kale, great for winter."},
+      {id:16, name:"parsley",                      price:2.50, category:"Herbs",      stock:10, image:"https://images.unsplash.com/photo-1587731556938-38755b4803a6?auto=format&fit=crop&w=1200&q=60", desc:"Fresh herb staple for cooking."},
+      {id:17, name:"cabbage (brunswick)",          price:3.00, category:"Salad",      stock:10, image:"https://images.unsplash.com/photo-1518977956815-dee0064f6a5a?auto=format&fit=crop&w=1200&q=60", desc:"Classic cabbage variety."},
+      {id:18, name:"basil (genovese)",             price:2.50, category:"Herbs",      stock:10, image:"https://images.unsplash.com/photo-1515586838455-8f8f940d6853?auto=format&fit=crop&w=1200&q=60", desc:"Sweet basil for sauces and salads."},
+      {id:19, name:"mixed herb seeds",             price:2.20, category:"Seeds",      stock:10, image:"https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=1200&q=60", desc:"Mixed herb seed pack."},
+      {id:20, name:"starter gift box",             price:9.99, category:"Gift Boxes", stock:10, image:"https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=60", desc:"A lovely starter bundle as a gift."},
+      {id:21, name:"pea seeds",                    price:2.20, category:"Seeds",      stock:10, image:"https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=1200&q=60", desc:"pea seed pack."},
+      {id:22, name:"sunflower seeds",              price:2.20, category:"Seeds",      stock:10, image:"https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=1200&q=60", desc:"sunflower seed pack."}
+    ];
+
+    // ===== State =====
+    let products = JSON.parse(localStorage.getItem(KEY)) || defaults;
+    let currentCat = "All";
+
+    // ===== Element refs (avoid relying on implicit globals) =====
+    const shop  = document.getElementById("shop");
+    const admin = document.getElementById("admin");
+    const searchEl = document.getElementById("search");
+    const sortEl   = document.getElementById("sort");
+    const catsEl   = document.getElementById("cats");
+    const gridEl   = document.getElementById("grid");
+
+    const nEl = document.getElementById("n");
+    const pEl = document.getElementById("p");
+    const cEl = document.getElementById("c");
+    const sEl = document.getElementById("s");
+    const iEl = document.getElementById("i");
+    const dEl = document.getElementById("d");
+    const adminListEl = document.getElementById("adminProductList");
+
+    const productModal = document.getElementById("productModal");
+    const productModalContent = document.getElementById("productModalContent");
+
+    function save(){
+      localStorage.setItem(KEY, JSON.stringify(products));
+    }
+    function money(n){
+      return "£" + Number(n).toFixed(2);
+    }
+
+    function renderCats(){
+      catsEl.innerHTML = "";
+      const allCats = ["All", ...new Set(products.map(p => p.category).filter(Boolean))];
+      allCats.forEach(cat => {
+        const b = document.createElement("button");
+        b.textContent = cat;
+        if(cat === currentCat) b.classList.add("active");
+        b.onclick = () => { currentCat = cat; render(); };
+        catsEl.appendChild(b);
+      });
+    }
+
+    function openProduct(p){
+      productModalContent.innerHTML = `
+        <h2>${p.name}</h2>
+        <img src="${p.image}" alt="${p.name}" style="width:100%;border-radius:12px">
+        <p>${p.desc || ""}</p>
+        <p><b>${money(p.price)}</b> • Stock: ${p.stock}</p>
+        <button class="btn grey" type="button" onclick="document.getElementById('productModal').style.display='none'">Close</button>
+      `;
+      productModal.style.display = "flex";
+    }
+
+    function render(){
+      renderCats();
+      gridEl.innerHTML = "";
+
+      let list = [...products];
+      const q = searchEl.value.trim().toLowerCase();
+      if(q) list = list.filter(p => p.name.toLowerCase().includes(q));
+      if(currentCat !== "All") list = list.filter(p => p.category === currentCat);
+
+      list.sort(sortEl.value === "price"
+        ? (a,b) => a.price - b.price
+        : (a,b) => a.name.localeCompare(b.name)
+      );
+
+      list.forEach(p => {
+        const d = document.createElement("div");
+        d.className = "card";
+
+        const badge = p.stock === 0
+          ? `<div class="stock-badge out">Out</div>`
+          : (p.stock < 5 ? `<div class="stock-badge low">Low</div>` : "");
+
+        d.innerHTML = `
+          ${badge}
+          <img src="${p.image}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p>${money(p.price)} • Stock: <b>${p.stock}</b></p>
+          <button class="btn dark" type="button">View</button>
+        `;
+        d.querySelector("button").onclick = () => openProduct(p);
+        gridEl.appendChild(d);
+      });
+
+      save();
+    }
+
+    // ===== Events =====
+    searchEl.addEventListener("input", render);
+    sortEl.addEventListener("change", render);
+
+    // Initial render
+    render();
+  </script>
 </body>
 </html>
