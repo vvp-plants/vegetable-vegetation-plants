@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leafy Greens Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --card-bg: #ffffff;
+      --accent: #4b8b3b;
+      --accent-soft: #e3f0dd;
+      --text-main: #233326;
+      --text-muted: #5f6c5f;
+      --border-soft: #d7dfd2;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 14px;
+      --radius-pill: 999px;
+      --max-width: 1100px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eaf3e3 0, #f5f7f2 40%, #f5f7f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+        header nav {
+            margin-bottom: 15px;
+        }
+
+        .large-button {
+            background: #3e8538;
+            color: var(--green-dark);
+            padding: 10px 18px;
+            margin: 0 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .large-button:hover {
+            background: var(--green-dark);
+            color: #0c9e00;
+        }
+
+
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    .pill span.icon { font-size: 1rem; }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 22px 22px 20px;
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    ul.list {
+      margin-left: 18px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    ul.list li { margin-bottom: 6px; }
+
+    .photo-block {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #f9fbf6;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+    }
+
+    .photo-block img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      max-height: 260px;
+    }
+
+    .photo-block .caption {
+      padding: 10px 14px 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+    <nav>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/" class="large-button">VVP</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/plants/" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+    </nav
+      <div class="pill">
+        <span>Leafy Greens Guide</span>
+      </div>
+      <h1>Growing Leafy Greens</h1>
+      <p>
+        Leafy greens are fast-growing, nutritious, and perfect for gardeners who want continuous harvests.
+        They thrive in cooler weather, rich soil, and consistent moisture.
+      </p>
+    </header>
+
+    <div class="photo-block">
+      <img src="https://images.pexels.com/photos/1022923/pexels-photo-1022923.jpeg" alt="Leafy greens growing in garden" />
+      <div class="caption">
+        A thriving bed of leafy greens: lettuce, kale, spinach, and chard.
+      </div>
+    </div>
+
+    <article class="card">
+      <h2>Why Leafy Greens Are Great</h2>
+      <p>
+        Leafy greens are some of the easiest and most rewarding crops. They grow quickly, can be harvested
+        repeatedly, and fit into small spaces, containers, or raised beds.
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Popular Leafy Greens</h2>
+      <p>
+        These greens are reliable, productive, and ideal for both beginners and experienced gardeners.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Lettuce</h3>
+          <p>
+            Loose-leaf varieties allow continuous harvesting. Crisphead types need cooler weather.
+          </p>
+          <ul class="list">
+            <li>Prefers moist soil</li>
+            <li>Grows well in partial shade</li>
+            <li>Harvest outer leaves regularly</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Spinach</h3>
+          <p>
+            Spinach thrives in cool temperatures and can bolt quickly in heat.
+          </p>
+          <ul class="list">
+            <li>Best in spring and autumn</li>
+            <li>Rich, fertile soil improves yield</li>
+            <li>Keep well-watered</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Kale</h3>
+          <p>
+            A hardy, nutrient-rich crop that produces through autumn and winter.
+          </p>
+          <ul class="list">
+            <li>Very cold-tolerant</li>
+            <li>Pick leaves from the bottom up</li>
+            <li>Great for smoothies and cooking</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Chard</h3>
+          <p>
+            Colourful stems and long cropping season make chard a garden favourite.
+          </p>
+          <ul class="list">
+            <li>Heat-tolerant</li>
+            <li>Cut-and-come-again harvests</li>
+            <li>Bright Lights variety is popular</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Growing Conditions</h2>
+      <p>
+        Leafy greens thrive when soil, water, and temperature are balanced. These tips help keep plants
+        productive and healthy.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Rich Soil</h3>
+          <p>
+            Add compost regularly. Leafy greens are heavy feeders and respond well to fertile soil.
+          </p>
+        </div>
+
+        <div>
+          <h3>Consistent Watering</h3>
+          <p>
+            Dry soil leads to bitter leaves. Keep soil evenly moist for tender growth.
+          </p>
+        </div>
+
+        <div>
+          <h3>Cool Temperatures</h3>
+          <p>
+            Most greens prefer spring and autumn. Provide shade in summer to prevent bolting.
+          </p>
+        </div>
+
+        <div>
+          <h3>Frequent Harvesting</h3>
+          <p>
+            Harvesting encourages new growth. Pick outer leaves first to keep plants producing.
+          </p>
+        </div>
+      </div>
+    </article>
+
+
+  </div>
+</body>
+</html>

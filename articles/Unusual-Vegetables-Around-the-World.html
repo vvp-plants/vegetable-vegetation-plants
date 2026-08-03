@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unusual Vegetables Around the World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --card-bg: #ffffff;
+      --accent: #4b8b3b;
+      --accent-soft: #e3f0dd;
+      --text-main: #233326;
+      --text-muted: #5f6c5f;
+      --border-soft: #d7dfd2;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 14px;
+      --radius-pill: 999px;
+      --max-width: 1100px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eaf3e3 0, #f5f7f2 40%, #f5f7f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+        header nav {
+            margin-bottom: 15px;
+        }
+
+        .large-button {
+            background: #3e8538;
+            color: var(--green-dark);
+            padding: 10px 18px;
+            margin: 0 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .large-button:hover {
+            background: var(--green-dark);
+            color: #0c9e00;
+        }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    .pill span.icon { font-size: 1rem; }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 22px 22px 20px;
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    ul.list {
+      margin-left: 18px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    ul.list li { margin-bottom: 6px; }
+
+    .photo-block {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #f9fbf6;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+    }
+
+    .photo-block img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      max-height: 260px;
+    }
+
+    .photo-block .caption {
+      padding: 10px 14px 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+    <nav>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/" class="large-button">VVP</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/plants/" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/articles" class="large-button">ARTICLES</a>
+    </nav>
+      <div class="pill">
+        <span>Unusual Vegetables Around the World</span>
+      </div>
+      <h1>Discover Rare & Unique Vegetables</h1>
+      <p>
+        The world is full of fascinating vegetables you won’t often see in supermarkets. From striking colours
+        to unusual shapes and surprising flavours, these vegetables offer a glimpse into global food traditions
+        and diverse growing cultures.
+      </p>
+    </header>
+
+    <div class="photo-block">
+      <img src="https://img.magnific.com/premium-photo/heirloom-vegetables-with-unique-shapes-colors_1079150-293329.jpg?w=1060" alt="Unusual vegetables from around the world" />
+      <div class="caption">
+        A colourful selection of rare and unusual vegetables grown in different regions of the world.
+      </div>
+    </div>
+
+    <article class="card">
+      <h2>Why Grow Unusual Vegetables?</h2>
+      <p>
+        Growing unusual vegetables adds excitement to your garden, introduces new flavours to your meals,
+        and helps preserve rare varieties. Many of these plants are deeply rooted in cultural traditions
+        and offer unique growing experiences.
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Unique Vegetables from Different Regions</h2>
+      <p>
+        These vegetables stand out for their appearance, flavour, or cultural significance.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Romanesco (Italy)</h3>
+          <p>
+            A stunning lime‑green vegetable with fractal patterns. Its flavour is similar to cauliflower
+            but slightly nuttier.
+          </p>
+          <ul class="list">
+            <li>Cool‑season crop</li>
+            <li>Prefers rich soil</li>
+            <li>Visually striking</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Oca (South America)</h3>
+          <p>
+            A colourful tuber ranging from yellow to pink. Slightly tangy, often used like potatoes.
+          </p>
+          <ul class="list">
+            <li>Thrives in cool climates</li>
+            <li>High‑yielding</li>
+            <li>Great roasted</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Kohlrabi (Germany)</h3>
+          <p>
+            A bulbous vegetable with a mild, sweet flavour. Crunchy when raw and excellent in salads.
+          </p>
+          <ul class="list">
+            <li>Easy to grow</li>
+            <li>Cold‑tolerant</li>
+            <li>Comes in green and purple</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Chinese Yardlong Beans (Asia)</h3>
+          <p>
+            Long, slender beans that can grow up to 1 metre. Tender and flavourful when stir‑fried.
+          </p>
+          <ul class="list">
+            <li>Heat‑loving</li>
+            <li>Climbing plant</li>
+            <li>Very productive</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Purple Sweet Potatoes (Japan)</h3>
+          <p>
+            Vibrant purple flesh with a sweet, rich flavour. Popular in desserts and savoury dishes.
+          </p>
+          <ul class="list">
+            <li>High antioxidants</li>
+            <li>Warm‑season crop</li>
+            <li>Striking colour</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Malabar Spinach (India)</h3>
+          <p>
+            A climbing leafy vegetable with thick, glossy leaves. Great for hot climates where regular
+            spinach struggles.
+          </p>
+          <ul class="list">
+            <li>Heat‑tolerant</li>
+            <li>Fast‑growing</li>
+            <li>Great in curries</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Tips for Growing Unusual Vegetables</h2>
+      <p>
+        Many unusual vegetables have specific needs. These tips help you succeed even with rare varieties.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Research Climate Needs</h3>
+          <p>
+            Some vegetables prefer heat, others thrive in cool weather. Match plants to your local climate.
+          </p>
+        </div>
+
+        <div>
+          <h3>Start Small</h3>
+          <p>
+            Try one or two unusual vegetables first to learn their habits before expanding.
+          </p>
+        </div>
+
+        <div>
+          <h3>Use Quality Soil</h3>
+          <p>
+            Many rare vegetables benefit from compost‑rich, well‑drained soil.
+          </p>
+        </div>
+
+        <div>
+          <h3>Save Seeds</h3>
+          <p>
+            Some unusual vegetables are hard to find. Saving seeds helps preserve rare varieties.
+          </p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</body>
+</html>

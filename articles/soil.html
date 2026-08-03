@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Soil, Plants, Nutrients & Drainage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --card-bg: #ffffff;
+      --accent: #4b8b3b;
+      --accent-soft: #e3f0dd;
+      --text-main: #233326;
+      --text-muted: #5f6c5f;
+      --border-soft: #d7dfd2;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 14px;
+      --radius-pill: 999px;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eaf3e3 0, #f5f7f2 40%, #f5f7f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.03em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+    }
+
+        header nav {
+            margin-bottom: 15px;
+        }
+
+        .large-button {
+            background: #3e8538;
+            color: var(--green-dark);
+            padding: 10px 18px;
+            margin: 0 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .large-button:hover {
+            background: var(--green-dark);
+            color: #0c9e00;
+        }
+
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .tagline span.icon {
+      font-size: 1rem;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 20px 20px 18px;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: #f0f4ee;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
+    .pill span.icon {
+      font-size: 0.9rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .soil-type {
+      border-radius: 12px;
+      border: 1px solid #e0e7dd;
+      padding: 10px 10px 12px;
+      background: #fbfdf9;
+    }
+
+    .soil-type h4 {
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    .soil-type p {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .soil-type ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 4px;
+      font-size: 0.88rem;
+    }
+
+    .soil-type ul li::before {
+      content: "• ";
+      color: var(--accent);
+    }
+
+    .photo-block {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #f9fbf6;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .photo-block img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      max-height: 260px;
+    }
+
+    .photo-block .caption {
+      padding: 10px 14px 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #dfe7d8;
+      background: #f7faf4;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+ <header>
+    <nav>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/" class="large-button">VVP</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/plants/" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+    </nav>
+      <div class="tagline">
+        <span>Plant-focused guide to soil, nutrients & drainage</span>
+      </div>
+      <h1>Growing Strong Plants Starts in the Soil</h1>
+      <p>
+        Every healthy plant is rooted in the right soil. Texture, nutrients, and drainage work together to
+        decide whether roots thrive, struggle, or simply give up. This page connects soil science directly
+        to what you care about most: vigorous, productive plants.
+      </p>
+    </header>
+
+    <main>
+      <!-- MAIN CONTENT -->
+      <section>
+        <!-- Soil Types & Plant Examples -->
+        <article class="card">
+          <div class="pill">
+            <span>Soil types and how plants respond</span>
+          </div>
+          <h2>Soil Types for Different Plant Personalities</h2>
+          <p>
+            Plants don’t just grow “in soil”—they grow in a specific mix of sand, silt, clay, and organic matter.
+            Each texture creates a different world for roots: some soils drain fast and suit drought-tolerant plants,
+            others hold water and feed heavy feeders like fruiting vegetables.
+          </p>
+
+          <div class="grid-2">
+            <div class="soil-type">
+              <h4>Sandy Soil</h4>
+              <p>
+                Light, gritty, and fast-draining. Roots get plenty of air, but water and nutrients escape quickly.
+              </p>
+              <ul>
+                <li>Best for: lavender, rosemary, carrots, onions</li>
+                <li>Plant note: ideal for deep-rooted, drought-tolerant plants that dislike “wet feet”.</li>
+              </ul>
+            </div>
+
+            <div class="soil-type">
+              <h4>Clay Soil</h4>
+              <p>
+                Dense, sticky when wet, and slow to drain—but rich in nutrients once roots break in.
+              </p>
+              <ul>
+                <li>Best for: roses, many shrubs, fruit trees</li>
+                <li>Plant note: suits moisture-loving plants; improve structure with compost to avoid waterlogging.</li>
+              </ul>
+            </div>
+
+            <div class="soil-type">
+              <h4>Silty Soil</h4>
+              <p>
+                Smooth and soft, holding water and nutrients well, but prone to compaction if walked on or overworked.
+              </p>
+              <ul>
+                <li>Best for: leafy greens, brassicas, grains</li>
+                <li>Plant note: great for vegetables if beds are kept loose and well-aerated.</li>
+              </ul>
+            </div>
+
+            <div class="soil-type">
+              <h4>Loam (The Gardener’s Dream)</h4>
+              <p>
+                A balanced mix of sand, silt, and clay with plenty of organic matter—good drainage, good fertility,
+                and a soft structure roots love.
+              </p>
+              <ul>
+                <li>Best for: almost everything—tomatoes, beans, flowers, herbs</li>
+                <li>Plant note: if you have loam, protect it: avoid compaction and keep adding organic matter.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Nutrients & Plant Health -->
+        <article class="card">
+          <div class="pill">
+            <span>Key nutrients and visible plant effects</span>
+          </div>
+          <h2>Soil Nutrients: What Your Plants Are Really Eating</h2>
+          <p>
+            Plants build leaves, roots, flowers, and fruits from a handful of core nutrients. When soil is short on
+            any of them, your plants tell you—through pale leaves, weak stems, or poor flowering. Understanding
+            nutrients turns guesswork into targeted care.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>Primary Nutrients</h3>
+              <p><strong>Nitrogen (N)</strong> drives lush, green growth. Leafy vegetables like lettuce and spinach are especially hungry for it.</p>
+              <p><strong>Phosphorus (P)</strong> supports strong roots and abundant flowers—crucial for crops like tomatoes and peppers.</p>
+              <p><strong>Potassium (K)</strong> helps plants move water, resist disease, and ripen fruit evenly.</p>
+            </div>
+            <div>
+              <h3>Secondary & Micronutrients</h3>
+              <p>
+                Calcium, magnesium, sulfur, iron, zinc and others fine-tune plant health: strong cell walls, deep
+                green leaves, and efficient photosynthesis.
+              </p>
+              <p>
+                Deficiencies often show as yellowing between veins, distorted new growth, or weak stems—signals that
+                soil or pH needs attention.
+              </p>
+            </div>
+          </div>
+
+          <p>
+            Organic matter—compost, leaf mould, well-rotted manure—acts like a slow-release buffet. It feeds soil
+            microbes, which in turn unlock nutrients for roots. For most garden plants, regularly adding organic
+            matter is the single best way to improve both fertility and structure.
+          </p>
+        </article>
+
+        <!-- Drainage & Root Environment -->
+        <article class="card">
+          <div class="pill">
+            <span>Drainage, root oxygen, and plant survival</span>
+          </div>
+          <h2>Drainage: Keeping Roots Hydrated, Not Drowned</h2>
+          <p>
+            Water is life—but too much water suffocates roots. Good drainage means water moves through the soil
+            slowly enough to be absorbed, but not so slowly that roots sit in stagnant, airless pockets.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>How Different Soils Handle Water</h3>
+              <p><strong>Sandy soils</strong> drain quickly, perfect for Mediterranean herbs but stressful for thirsty vegetables.</p>
+              <p><strong>Clay soils</strong> hold water, suiting moisture-loving plants but risking root rot if not structured well.</p>
+              <p><strong>Loam</strong> balances both—retaining enough moisture for most crops while still letting excess water escape.</p>
+            </div>
+            <div>
+              <h3>Plant-Level Effects</h3>
+              <p>
+                Poor drainage leads to yellowing leaves, wilting despite wet soil, and roots that turn brown and mushy.
+                Good drainage keeps oxygen around roots, encourages fine root hairs, and supports active nutrient uptake.
+              </p>
+              <p>
+                Raised beds, organic matter, and avoiding compaction (no walking on beds) are simple ways to improve
+                drainage for most garden plants.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- SIDEBAR: PHOTOS & QUICK PLANT NOTES -->
+      <aside class="sidebar">
+        <div class="photo-block">
+          <img src="https://images.pexels.com/photos/4751978/pexels-photo-4751978.jpeg" alt="Healthy vegetable plants growing in rich soil" />
+          <div class="caption">
+            Healthy vegetable roots in well-structured loam: moisture, air, and nutrients in balance.
+          </div>
+        </div>
+
+        <article class="card">
+          <div class="pill">
+            <span>Quick plant–soil matches</span>
+          </div>
+          <h2>Match Plants to Their Ideal Soil</h2>
+          <p>
+            Choosing plants that suit your existing soil is often easier than trying to change the soil completely.
+            Use these quick matches as a starting point:
+          </p>
+          <div class="badge-list">
+            <span class="badge">Lavender → Sandy, well-drained</span>
+            <span class="badge">Tomatoes → Loam, rich in compost</span>
+            <span class="badge">Blueberries → Acidic, organic-rich</span>
+            <span class="badge">Roses → Clay/loam, improved with compost</span>
+            <span class="badge">Carrots → Loose, sandy loam</span>
+            <span class="badge">Lettuces → Moist, fertile loam</span>
+          </div>
+        </article>
+
+        <div class="photo-block">
+          <img src="https://images.pexels.com/photos/1022923/pexels-photo-1022923.jpeg" alt="Hands holding dark compost-rich soil" />
+          <div class="caption">
+            Compost-rich soil: darker colour, crumbly texture, and a thriving habitat for roots and microbes.
+          </div>
+        </div>
+      </aside>
+    </main>
+
+  </div>
+</body>
+</html>

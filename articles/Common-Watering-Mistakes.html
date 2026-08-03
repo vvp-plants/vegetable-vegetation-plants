@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Common Watering Mistakes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --card-bg: #ffffff;
+      --accent: #4b8b3b;
+      --accent-soft: #e3f0dd;
+      --text-main: #233326;
+      --text-muted: #5f6c5f;
+      --border-soft: #d7dfd2;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 14px;
+      --radius-pill: 999px;
+      --max-width: 1100px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eaf3e3 0, #f5f7f2 40%, #f5f7f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+        header nav {
+            margin-bottom: 15px;
+        }
+
+        .large-button {
+            background: #3e8538;
+            color: var(--green-dark);
+            padding: 10px 18px;
+            margin: 0 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .large-button:hover {
+            background: var(--green-dark);
+            color: #0c9e00;
+        }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    .pill span.icon { font-size: 1rem; }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 22px 22px 20px;
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    ul.list {
+      margin-left: 18px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    ul.list li { margin-bottom: 6px; }
+
+    .photo-block {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #f9fbf6;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+    }
+
+    .photo-block img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      max-height: 260px;
+    }
+
+    .photo-block .caption {
+      padding: 10px 14px 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+    <nav>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/" class="large-button">VVP</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/plants/" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/articles" class="large-button">ARTICLES</a>
+    </nav>
+      <div class="pill">
+        <span>Common Watering Mistakes</span>
+      </div>
+      <h1>Watering Mistakes Gardeners Often Make</h1>
+      <p>
+        Watering seems simple, but it’s one of the most common causes of plant stress. Too much, too little,
+        or watering at the wrong time can weaken even the healthiest plants. This guide helps you avoid
+        the mistakes most gardeners make.
+      </p>
+    </header>
+
+    <div class="photo-block">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.Z2rBTTFOj2rLvkjYrygo3QHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3&adlt=strict" alt="Watering plants" />
+      <div class="caption">
+        Proper watering keeps soil moist—not soggy—and supports strong, healthy roots.
+      </div>
+    </div>
+
+    <article class="card">
+      <h2>Why Watering Matters</h2>
+      <p>
+        Water carries nutrients, cools plants, and keeps roots alive. But plants need the right amount at
+        the right time. Understanding how soil and roots behave helps you water more effectively.
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Common Watering Mistakes</h2>
+      <p>
+        These are the mistakes gardeners make most often—and how to avoid them.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Overwatering</h3>
+          <p>
+            The most common mistake. Too much water suffocates roots, causing yellow leaves and root rot.
+          </p>
+          <ul class="list">
+            <li>Soil stays soggy</li>
+            <li>Leaves turn pale or droop</li>
+            <li>Roots may rot</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Underwatering</h3>
+          <p>
+            Dry soil leads to crispy leaves, slow growth, and weak roots. Plants may wilt even after watering.
+          </p>
+          <ul class="list">
+            <li>Soil pulls away from pot edges</li>
+            <li>Leaves curl or brown</li>
+            <li>Growth slows dramatically</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Watering Too Quickly</h3>
+          <p>
+            Splashing water on the surface doesn’t reach the roots. Slow, deep watering is more effective.
+          </p>
+          <ul class="list">
+            <li>Water runs off instead of soaking</li>
+            <li>Roots stay shallow</li>
+            <li>Plants dry out faster</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Watering at the Wrong Time</h3>
+          <p>
+            Watering in strong sun wastes water and can stress plants. Morning is usually best.
+          </p>
+          <ul class="list">
+            <li>Morning watering reduces evaporation</li>
+            <li>Evening watering can encourage mildew</li>
+            <li>Midday watering is inefficient</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>How to Water Correctly</h2>
+      <p>
+        These simple habits help you avoid mistakes and keep plants hydrated without drowning them.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Check Soil First</h3>
+          <p>
+            Stick your finger into the soil. If the top 2–3 cm are dry, it’s time to water.
+          </p>
+        </div>
+
+        <div>
+          <h3>Water Deeply</h3>
+          <p>
+            Deep watering encourages strong roots and reduces how often you need to water.
+          </p>
+        </div>
+
+        <div>
+          <h3>Use Mulch</h3>
+          <p>
+            Mulch helps soil stay moist longer and reduces evaporation—especially in summer.
+          </p>
+        </div>
+
+        <div>
+          <h3>Match Watering to Soil Type</h3>
+          <p>
+            Sandy soil dries quickly; clay soil holds water longer. Adjust your watering accordingly.
+          </p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</body>
+</html>

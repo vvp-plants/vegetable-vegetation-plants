@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Soil, Plants, Nutrients & Drainage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --card-bg: #ffffff;
+      --accent: #4b8b3b;
+      --accent-soft: #e3f0dd;
+      --text-main: #233326;
+      --text-muted: #5f6c5f;
+      --border-soft: #d7dfd2;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 14px;
+      --radius-pill: 999px;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eaf3e3 0, #f5f7f2 40%, #f5f7f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.03em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+    }
+
+        header nav {
+            margin-bottom: 15px;
+        }
+
+        .large-button {
+            background: #3e8538;
+            color: var(--green-dark);
+            padding: 10px 18px;
+            margin: 0 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .large-button:hover {
+            background: var(--green-dark);
+            color: #0c9e00;
+        }
+
+
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .tagline span.icon {
+      font-size: 1rem;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 20px 20px 18px;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: #f0f4ee;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
+    .pill span.icon {
+      font-size: 0.9rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .soil-type {
+      border-radius: 12px;
+      border: 1px solid #e0e7dd;
+      padding: 10px 10px 12px;
+      background: #fbfdf9;
+    }
+
+    .soil-type h4 {
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    .soil-type p {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .soil-type ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 4px;
+      font-size: 0.88rem;
+    }
+
+    .soil-type ul li::before {
+      content: "• ";
+      color: var(--accent);
+    }
+
+    .photo-block {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #f9fbf6;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .photo-block img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      max-height: 260px;
+    }
+
+    .photo-block .caption {
+      padding: 10px 14px 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #dfe7d8;
+      background: #f7faf4;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+    <nav>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/" class="large-button">VVP</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/plants/" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+    </nav>
+      <div class="pill">
+        <span>Beginner-Friendly Vegetables</span>
+      </div>
+      <h1>Easy Vegetables for New Gardeners</h1>
+      <p>
+        Starting your vegetable-growing journey doesn’t have to be complicated. These beginner-friendly crops
+        grow quickly, forgive mistakes, and reward you with satisfying harvests.
+      </p>
+    </header>
+
+    <div class="photo-block">
+      <img src="https://images.pexels.com/photos/4751978/pexels-photo-4751978.jpeg" alt="Beginner vegetable garden" />
+      <div class="caption">
+        A simple, productive beginner vegetable bed with fast-growing crops.
+      </div>
+    </div>
+
+    <article class="card">
+<center>
+<table>
+<tr>
+<th><img src="https://www.familyhandyman.com/wp-content/uploads/2023/04/GettyImages-1418173645.jpg" width="375px" height="250px"></th>
+<th><img src="https://fowlfamily.com/wp-content/uploads/2024/09/Best-Vegetable-Garden-Layout-Ideas-1024x574.jpg" width="375px" height="250px"></th>
+</tr>
+</table>
+</center>
+      <h2>Top Beginner Vegetables</h2>
+      <p>
+        These vegetables are reliable, fast-growing, and ideal for learning the basics of watering, spacing,
+        and soil care.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Radishes</h3>
+          <p>
+            One of the fastest crops you can grow—ready in just 3–5 weeks. Perfect for impatient gardeners.
+          </p>
+          <ul class="list">
+            <li>Grow in loose soil</li>
+            <li>Water evenly to avoid splitting</li>
+            <li>Great for small spaces</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Lettuce & Salad Mixes</h3>
+          <p>
+            Extremely versatile and productive. Harvest leaf-by-leaf for continuous salads.
+          </p>
+          <ul class="list">
+            <li>Grow in pots or beds</li>
+            <li>Prefers cooler weather</li>
+            <li>Keep soil moist for tender leaves</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Runner Beans & French Beans</h3>
+          <p>
+            Climbing or bush varieties produce abundant harvests with minimal effort.
+          </p>
+          <ul class="list">
+            <li>Need support if climbing</li>
+            <li>Rich soil improves yield</li>
+            <li>Very forgiving for beginners</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Courgettes</h3>
+          <p>
+            A single plant can produce dozens of courgettes throughout summer.
+          </p>
+          <ul class="list">
+            <li>Needs space to spread</li>
+            <li>Water regularly</li>
+            <li>Thrives in compost-rich soil</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Beginner Growing Tips</h2>
+      <p>
+        These simple habits make a huge difference when you’re just starting out.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Start Small</h3>
+          <p>
+            A few pots or a small raised bed is easier to manage and helps you learn faster.
+          </p>
+        </div>
+
+        <div>
+          <h3>Use Good Soil</h3>
+          <p>
+            Loamy compost-rich soil gives beginners the best chance of success.
+          </p>
+        </div>
+
+        <div>
+          <h3>Water Consistently</h3>
+          <p>
+            Most beginner failures come from overwatering or underwatering. Aim for moist, not soggy.
+          </p>
+        </div>
+
+        <div>
+          <h3>Give Plants Space</h3>
+          <p>
+            Crowded plants compete for light and nutrients. Follow spacing guides on seed packets.
+          </p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</body>
+</html>

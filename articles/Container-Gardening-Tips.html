@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Container Gardening Tips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --card-bg: #ffffff;
+      --accent: #4b8b3b;
+      --accent-soft: #e3f0dd;
+      --text-main: #233326;
+      --text-muted: #5f6c5f;
+      --border-soft: #d7dfd2;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 14px;
+      --radius-pill: 999px;
+      --max-width: 1100px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eaf3e3 0, #f5f7f2 40%, #f5f7f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+        header nav {
+            margin-bottom: 15px;
+        }
+
+        .large-button {
+            background: #3e8538;
+            color: var(--green-dark);
+            padding: 10px 18px;
+            margin: 0 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .large-button:hover {
+            background: var(--green-dark);
+            color: #0c9e00;
+        }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    .pill span.icon { font-size: 1rem; }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 22px 22px 20px;
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    ul.list {
+      margin-left: 18px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    ul.list li { margin-bottom: 6px; }
+
+    .photo-block {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #f9fbf6;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+    }
+
+    .photo-block img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      max-height: 260px;
+    }
+
+    .photo-block .caption {
+      padding: 10px 14px 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+    <nav>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/" class="large-button">VVP</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/plants/" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/articles" class="large-button">ARTICLES</a>
+    </nav>
+      <div class="pill">
+        <span>Container Gardening Tips</span>
+      </div>
+      <h1>Grow Plants Successfully in Containers</h1>
+      <p>
+        Container gardening is perfect for balconies, patios, small gardens, and anyone who wants flexible,
+        easy‑to‑manage growing spaces. With the right soil, pots, and watering habits, you can grow almost
+        anything in containers.
+      </p>
+    </header>
+
+    <div class="photo-block">
+      <img src="https://thegardenhaven.com/wp-content/uploads/2025/06/A-well-lit-outdoor-herb-garden-showcasing-an-assortment-of-beautifully-arranged-containers.jpeg" alt="Container garden with herbs and vegetables" />
+      <div class="caption">
+        A thriving container garden with herbs, vegetables, and flowers in well‑chosen pots.
+      </div>
+    </div>
+
+    <article class="card">
+      <h2>Why Container Gardening Works</h2>
+      <p>
+        Containers give you control over soil quality, drainage, and placement. They’re ideal for beginners,
+        renters, and anyone with limited space. You can move plants to follow the sun, avoid harsh weather,
+        or redesign your garden anytime.
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Choosing the Right Containers</h2>
+      <p>
+        The container you choose affects root growth, moisture levels, and plant health. Bigger is usually
+        better, but each material has its own benefits.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Plastic Pots</h3>
+          <p>
+            Lightweight, affordable, and great for retaining moisture. Ideal for beginners.
+          </p>
+          <ul class="list">
+            <li>Easy to move</li>
+            <li>Good for thirsty plants</li>
+            <li>Can heat up in strong sun</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Terracotta Pots</h3>
+          <p>
+            Beautiful and breathable, but dry out quickly. Perfect for herbs and Mediterranean plants.
+          </p>
+          <ul class="list">
+            <li>Classic look</li>
+            <li>Great airflow</li>
+            <li>Needs more watering</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Grow Bags</h3>
+          <p>
+            Flexible, breathable, and excellent for root vegetables and tomatoes.
+          </p>
+          <ul class="list">
+            <li>Promote strong roots</li>
+            <li>Easy to store</li>
+            <li>Dry faster than pots</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Large Tubs & Planters</h3>
+          <p>
+            Best for big crops like courgettes, potatoes, or small fruit trees.
+          </p>
+          <ul class="list">
+            <li>More soil = healthier plants</li>
+            <li>Great for mixed plantings</li>
+            <li>Heavy when full</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Soil & Drainage</h2>
+      <p>
+        Container plants rely entirely on the soil you give them. Good drainage prevents root rot, while
+        nutrient‑rich compost keeps plants growing strong.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Use Potting Mix</h3>
+          <p>
+            Potting mix is lighter and drains better than garden soil. It prevents compaction and supports
+            healthy roots.
+          </p>
+        </div>
+
+        <div>
+          <h3>Ensure Drainage Holes</h3>
+          <p>
+            Without drainage, water collects at the bottom and suffocates roots. Always choose containers
+            with holes.
+          </p>
+        </div>
+
+        <div>
+          <h3>Add Organic Matter</h3>
+          <p>
+            Compost improves moisture retention and provides nutrients for long‑term growth.
+          </p>
+        </div>
+
+        <div>
+          <h3>Mulch the Surface</h3>
+          <p>
+            Mulch helps soil stay moist longer and reduces how often you need to water.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Watering Container Plants</h2>
+      <p>
+        Containers dry out faster than garden beds. Consistent watering keeps plants healthy and prevents
+        stress.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Check Soil Daily</h3>
+          <p>
+            Stick your finger into the soil. If the top 2–3 cm are dry, it’s time to water.
+          </p>
+        </div>
+
+        <div>
+          <h3>Water Deeply</h3>
+          <p>
+            Water until it drains from the bottom. This encourages deep, strong roots.
+          </p>
+        </div>
+
+        <div>
+          <h3>Avoid Waterlogging</h3>
+          <p>
+            Soggy soil leads to root rot. Make sure containers drain freely.
+          </p>
+        </div>
+
+        <div>
+          <h3>Group Plants Together</h3>
+          <p>
+            Grouping containers helps maintain humidity and reduces how quickly soil dries out.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Best Plants for Containers</h2>
+      <p>
+        Many plants thrive in containers, especially compact or fast‑growing varieties.
+      </p>
+
+      <ul class="list">
+        <li>Herbs: basil, mint, rosemary, thyme</li>
+        <li>Vegetables: tomatoes, peppers, lettuce, radishes</li>
+        <li>Flowers: marigolds, petunias, geraniums</li>
+        <li>Fruit: strawberries, dwarf blueberries, patio fruit trees</li>
+      </ul>
+    </article>
+
+  </div>
+</body>
+</html>
