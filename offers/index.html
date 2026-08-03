@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VVP - Offers</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #0E3612;
+      color: #111;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      z-index: 1000;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 0;
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .large-button {
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.12s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    }
+
+    .large-button:hover {
+      background-color: #004F00;
+      transform: translateY(-2px);
+    }
+
+    /* Offers grid */
+    .offers-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .offer-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    .offer-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .offer-content {
+      padding: 20px;
+    }
+
+    .offer-content h2 {
+      margin: 0 0 10px;
+      color: #0E3612;
+    }
+
+    .offer-content p {
+      margin: 0 0 15px;
+      font-size: 16px;
+    }
+
+    .offer-tag {
+      display: inline-block;
+      background: #004F00;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .offers-container {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a class="logo" href="index.html">VVP</a>
+
+      <nav class="top-buttons">
+        <a href="index.html" class="large-button">VVP</a>
+        <a href="plants.html" class="large-button">PLANTS</a>
+        <a href="offers.html" class="large-button">OFFERS</a>
+        <a href="contact.html" class="large-button">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Offers -->
+  <div class="offers-container">
+
+    <a href="discount-JUNE-2026.html" class="offer-card">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="10% off plants">
+      <div class="offer-content">
+        <span class="offer-tag">10% OFF</span>
+        <h2>10% Off Your First Order</h2>
+        <p>Claim your exclusive discount code and save on your first plant purchase.</p>
+      </div>
+    </a>
+
+    <a href="monthly-delivery-box.html" class="offer-card">
+      <img src="https://raw.githubusercontent.com/djhpsawse/vegetable-vegetation-plants/refs/heads/main/assorted-fresh-vegetable-boxes-with-tomatoes-peppers-cucumbers-radishes-spinach-and-oranges-concept-of-healthy-eating-organic-produce-farm-to-table-natural-food-isol.jpeg" alt="Monthly plant box">
+      <div class="offer-content">
+        <span class="offer-tag">SUBSCRIBE</span>
+        <h2>Monthly Plant Delivery Box</h2>
+        <p>Fresh plants delivered to your door every month. Cancel anytime.</p>
+      </div>
+    </a>
+
+    <a href="wild-flower.html" class="offer-card">
+      <img src="https://wallpapercave.com/wp/wp2093971.jpg" alt="Wildflower seeds">
+      <div class="offer-content">
+        <span class="offer-tag">FREE SEEDS</span>
+        <h2>Grow Wild</h2>
+        <p>Transform your garden into a wild haven with free wildflower seed packs.</p>
+      </div>
+    </a>
+
+    <a href="shop.html" class="offer-card">
+      <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Order plants">
+      <div class="offer-content">
+        <span class="offer-tag">SPECIAL DEALS</span>
+        <h2>Order a Plant</h2>
+        <p>Browse our shop for exclusive plant deals and limited-time offers.</p>
+      </div>
+    </a>
+
+  </div>
+
+</body>
+</html>
