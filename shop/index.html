@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VVP - Seed Starter Gift Kits</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #0E3612;
+      color: #111;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      z-index: 1000;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 0;
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .large-button {
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.12s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    }
+
+    .large-button:hover {
+      background-color: #004F00;
+      transform: translateY(-2px);
+    }
+
+    /* Shop grid */
+    .shop-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product-content {
+      padding: 20px;
+    }
+
+    .product-content h2 {
+      margin: 0 0 10px;
+      color: #0E3612;
+    }
+
+    .product-content p {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #004F00;
+      margin-bottom: 12px;
+    }
+
+    .buy-button {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #004F00;
+      color: white;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.25s;
+    }
+
+    .buy-button:hover {
+      background: #007700;
+      transform: translateY(-2px);
+    }
+
+    .tag {
+      background: #004F00;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a class="logo" href="index.html">VVP</a>
+
+      <nav class="top-buttons">
+        <a href="index.html" class="large-button">VVP</a>
+        <a href="plants.html" class="large-button">PLANTS</a>
+        <a href="offers.html" class="large-button">OFFERS</a>
+        <a href="shop.html" class="large-button">SHOP</a>
+        <a href="contact.html" class="large-button">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Shop grid -->
+  <div class="shop-container">
+
+    <!-- Standard Edition -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Standard Seed Starter Kit">
+      <div class="product-content">
+        <span class="tag">STANDARD</span>
+        <h2>Pocket Grow Kit — Seed Starter Gift Box</h2>
+        <p>Includes 10 seeds, 5 coir discs, 5 pots, and a beginner-friendly brochure.</p>
+        <div class="price">£12.99</div>
+        <a href="#" class="buy-button">Buy Now</a>
+      </div>
+    </div>
+
+    <!-- Seasonal Editions -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Christmas Kit">
+      <div class="product-content">
+        <span class="tag">SEASONAL</span>
+        <h2>Merry & Bright — Christmas Kitchen Garden</h2>
+        <p>Rosemary, thyme, basil + candy canes, ribbon, and festive kraft packaging.</p>
+        <div class="price">£15.99</div>
+        <a href="#" class="buy-button">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1523475496153-3d6cc0c0f1d1" alt="Spring Kit">
+      <div class="product-content">
+        <span class="tag">SEASONAL</span>
+        <h2>Hello Spring — Little Bloom Box</h2>
+        <p>Wildflowers, daisies, forget‑me‑nots + pastel ribbon and Easter extras.</p>
+        <div class="price">£15.99</div>
+        <a href="#" class="buy-button">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Mother's Day Kit">
+      <div class="product-content">
+        <span class="tag">SEASONAL</span>
+        <h2>Mum’s Little Garden — Mother’s Day Edition</h2>
+        <p>Lavender, chamomile, sweet pea + “For Mum” card and floral packaging.</p>
+        <div class="price">£16.99</div>
+        <a href="#" class="buy-button">Buy Now</a>
+      </div>
+    </div>
+
+    <!-- Premium Edition -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1589927986089-35812386e0c1" alt="Premium Kit">
+      <div class="product-content">
+        <span class="tag">PREMIUM</span>
+        <h2>The Windowsill Garden Kit — Premium Edition</h2>
+        <p>Personalised message + plant markers, ribbon, upgraded packaging.</p>
+        <div class="price">£19.99</div>
+        <a href="#" class="buy-button">Buy Now</a>
+      </div>
+    </div>
+
+    <!-- Bee Friendly -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Bee Friendly Kit">
+      <div class="product-content">
+        <span class="tag">SEASONAL</span>
+        <h2>Bee Kind — Save the Bees Kit</h2>
+        <p>Pollinator mix + bee-friendly guide + eco packaging.</p>
+        <div class="price">£15.99</div>
+        <a href="#" class="buy-button">Buy Now</a>
+      </div>
+    </div>
+
+    <!-- Mystery Box -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0" alt="Mystery Box">
+      <div class="product-content">
+        <span class="tag">FUN EDITION</span>
+        <h2>Surprise Grow Kit — Mystery Garden Box</h2>
+        <p>Mixed seeds + mystery reveal card + playful packaging.</p>
+        <div class="price">£14.99</div>
+        <a href="#" class="buy-button">Buy Now</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
