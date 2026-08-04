@@ -197,10 +197,20 @@
     <div class="card">
       <h2>Sign Up</h2>
 
-<form action="save.php" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <button type="submit">Send</button>
+<form action="https://formsubmit.co/vvp@outlook.com" method="POST">
+  <label for="first-name">First Name</label>
+  <input id="first-name" type="text" name="first_name" placeholder="First name" required>
+
+  <label for="surname">Surname</label>
+  <input id="surname" type="text" name="surname" placeholder="Surname" required>
+
+  <label for="email">Email</label>
+  <input id="email" type="email" name="email" placeholder="Email address" required>
+
+  <label for="phone">Phone Number (optional)</label>
+  <input id="phone" type="tel" name="phone_number" placeholder="Phone number">
+
+  <button type="submit">Send</button>
 </form>
     </div>
 
