@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VVP Plants Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f7f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: #ffffff;
+      padding: 24px 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 360px;
+      width: 100%;
+    }
+    .login-container h1 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 22px;
+      text-align: center;
+      color: #2f4f2f;
+    }
+    .login-container label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      background: #3b7a3b;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .login-container button:hover {
+      background: #336633;
+    }
+    .error {
+      color: #b00020;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>VVP Plants Login</h1>
+    <div id="error" class="error">Invalid username or password.</div>
+    <form id="loginForm">
+      <label for="username">Email</label>
+      <input type="text" id="username" name="username" placeholder="Enter your email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+
+  <script>
+    // Simple front-end check (replace with real authentication on server)
+    const form = document.getElementById('loginForm');
+    const errorBox = document.getElementById('error');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById('vvp-plants@outlook').value.trim();
+      const password = document.getElementById('vvp#three#plants').value.trim();
+
+      // Example: check against a specific email and password
+      const validEmail = 'vvp-plants@outlook';
+      const validPassword = 'vvp#three#plants'; // change this
+
+      if (username === validEmail && password === validPassword) {
+        // Redirect to your protected page
+        window.location.href = 'https://vvp-plants.github.io/vegetable-vegetation-plants/login/123vvp345plants678@90outlook/';
+      } else {
+        errorBox.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
