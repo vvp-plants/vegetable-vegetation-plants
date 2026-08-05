@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Newsletter Sign-Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --card-bg: #ffffff;
+      --accent: #4b8b3b;
+      --accent-soft: #e3f0dd;
+      --text-main: #233326;
+      --text-muted: #5f6c5f;
+      --border-soft: #d7dfd2;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 14px;
+      --radius-pill: 999px;
+      --max-width: 600px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eaf3e3 0, #f5f7f2 40%, #f5f7f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 40px 16px;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      background: #111111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      z-index: 1000;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 0;
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .large-button {
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.12s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    }
+
+    .large-button:hover {
+      background-color: #004F00;
+      transform: translateY(-2px);
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      margin-top: 40px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 24px;
+      margin-top: 20px;
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    input {
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-soft);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      padding: 12px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: white;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #3a6f2f;
+    }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a class="logo" href="#">VVP</a>
+
+      <nav class="top-buttons">
+        <a href="#" class="large-button">VVP</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/plants/" class="large-button">PLANTS</a>
+        <a href="https://www.gardenersworld.com/" class="large-button">GARDENERS WORLD</a>
+        <a href="https://vvp-plants.github.io/vegetable-vegetation-plants/articles/" class="large-button">ARTICLES</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page">
+<center>
+    <header>
+      <h1>Thank you, but you seem to all ready be on our newsletter please navagate back to our main website.
+          If this is incorrect please get in touch with us via our website contact page https://vvp-plants.github.io/vegetable-vegetation-plants/contact   
+          Or email us at vvp-plants@outlook.com</h1>
+    </header>
+</center>
+  </div>
+</body>
+</html>
