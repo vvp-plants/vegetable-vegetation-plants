@@ -1,102 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>VVP Plants Login</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f3f7f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .login-container {
-      background: #ffffff;
-      padding: 24px 32px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      max-width: 360px;
-      width: 100%;
-    }
-    .login-container h1 {
-      margin-top: 0;
-      margin-bottom: 16px;
-      font-size: 22px;
-      text-align: center;
-      color: #2f4f2f;
-    }
-    .login-container label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-    .login-container input[type="text"],
-    .login-container input[type="password"] {
-      width: 100%;
-      padding: 8px 10px;
-      margin-bottom: 14px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    .login-container button {
-      width: 100%;
-      padding: 10px;
-      background: #3b7a3b;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    .login-container button:hover {
-      background: #336633;
-    }
-    .error {
-      color: #b00020;
-      font-size: 13px;
-      margin-bottom: 10px;
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Magazine Info</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  .form-container {
+    background: white;
+    padding: 25px;
+    width: 420px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  #map {
+    height: 250px;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #005fa3;
+  }
+</style>
 </head>
+
 <body>
-  <div class="login-container">
-    <h1>VVP Plants Login</h1>
-    <div id="error" class="error">Invalid email or password.</div>
+<div class="form-container">
+  <h2>Information Form</h2>
 
-    <form id="loginForm">
-      <label for="username">Email</label>
-      <input type="text" id="username" name="username" placeholder="vvp-plants@outlook.com" required />
+  <form>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter password" required />
+    <!-- LOCATION DROPDOWN -->
+    <label>Location:</label>
+    <select name="location">
+      <option value="">Select a location</option>
+      <option value="London">London</option>
+      <option value="Manchester">Manchester</option>
+      <option value="Birmingham">Birmingham</option>
+      <option value="Liverpool">Liverpool</option>
+      <option value="Leeds">Leeds</option>
+    </select>
 
-      <button type="submit">Log In</button>
-    </form>
-  </div>
+    <!-- LOCATION TEXT -->
+    <label>Location:</label>
+    <input type="text" name="location_text" placeholder="Type a location">
 
-  <script>
-    const form = document.getElementById('loginForm');
-    const errorBox = document.getElementById('error');
+    <!-- MAP SEARCH -->
+    <label>Search Location:</label>
+    <input type="text" id="searchBox" placeholder="Search for a place">
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    <!-- MAP -->
+    <div id="map"></div>
 
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
+    <!-- COORDINATES -->
+    <!-- MAG -->
+    <label>Magazine:</label>
+    <input type="text" name="mag" required>
 
-      // SAFE: Only checks format, does NOT expose real password
-      if (username === "vvp-plants@outlook.com" && password.length > 0) {
-        window.location.href = "https://vvp-plants.github.io/vegetable-vegetation-plants/login/";
-      } else {
-        errorBox.style.display = "block";
-      }
-    });
-  </script>
+    <!-- EMAIL -->
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <!-- PHONE -->
+    <label>Phone:</label>
+    <input type="tel" name="phone" required>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  // Init map
+  const map = L.map('map').setView([52.5, -1.5], 6);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+
+  // Marker
+  let marker = L.marker([52.5, -1.5], { draggable: true }).addTo(map);
+
+  // Update coordinates when marker dragged
+  marker.on('dragend', function(e) {
+    const pos = marker.getLatLng();
+    document.getElementById("lat").value = pos.lat;
+    document.getElementById("lng").value = pos.lng;
+  });
+
+  // Search box (Nominatim)
+  document.getElementById("searchBox").addEventListener("change", function() {
+    const query = this.value;
+
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const place = data[0];
+          const lat = place.lat;
+          const lon = place.lon;
+
+          map.setView([lat, lon], 14);
+          marker.setLatLng([lat, lon]);
+
+          document.getElementById("lat").value = lat;
+          document.getElementById("lng").value = lon;
+        }
+      });
+  });
+</script>
+
 </body>
 </html>
