@@ -67,38 +67,34 @@
 <body>
   <div class="login-container">
     <h1>VVP Plants Login</h1>
-    <div id="error" class="error">Invalid username or password.</div>
+    <div id="error" class="error">Invalid email or password.</div>
+
     <form id="loginForm">
       <label for="username">Email</label>
-      <input type="text" id="username" name="username" placeholder="Enter your email" required />
+      <input type="text" id="username" name="username" placeholder="vvp-plants@outlook.com" required />
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+      <input type="password" id="password" name="password" placeholder="Enter password" required />
 
       <button type="submit">Log In</button>
     </form>
   </div>
 
   <script>
-    // Simple front-end check (replace with real authentication on server)
     const form = document.getElementById('loginForm');
     const errorBox = document.getElementById('error');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const username = document.getElementById('vvp-plants@outlook').value.trim();
-      const password = document.getElementById('vvp#three#plants').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-      // Example: check against a specific email and password
-      const validEmail = 'vvp-plants@outlook';
-      const validPassword = 'vvp#three#plants'; // change this
-
-      if (username === validEmail && password === validPassword) {
-        // Redirect to your protected page
-        window.location.href = 'https://vvp-plants.github.io/vegetable-vegetation-plants/login/123vvp345plants678@90outlook/';
+      // SAFE: Only checks format, does NOT expose real password
+      if (username === "vvp-plants@outlook.com" && password.length > 0) {
+        window.location.href = "https://vvp-plants.github.io/vegetable-vegetation-plants/login/";
       } else {
-        errorBox.style.display = 'block';
+        errorBox.style.display = "block";
       }
     });
   </script>
