@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barcode Scanner</title>
+
+<script src="https://unpkg.com/@zxing/library@latest"></script>
+
+<style>
+    body{
+        font-family:Arial, sans-serif;
+        background:#f4f4f4;
+        text-align:center;
+        padding:20px;
+    }
+
+    .container{
+        max-width:700px;
+        margin:auto;
+        background:#fff;
+        padding:20px;
+        border-radius:12px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    video{
+        width:100%;
+        max-width:600px;
+        border-radius:10px;
+        border:2px solid #ddd;
+    }
+
+    button{
+        padding:12px 20px;
+        margin:10px;
+        font-size:16px;
+        cursor:pointer;
+        border:none;
+        border-radius:6px;
+        background:#0078ff;
+        color:white;
+    }
+
+    button:hover{
+        background:#005fd1;
+    }
+
+    #result{
+        margin-top:20px;
+        font-size:20px;
+        font-weight:bold;
+        color:green;
+        word-break:break-all;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Barcode Scanner</h1>
+
+    <video id="video" autoplay muted playsinline></video>
+
+    <div>
+        <button id="startBtn">Start Camera</button>
+        <button id="stopBtn">Stop Camera</button>
+    </div>
+
+    <div id="result">No barcode detected.</div>
+</div>
+
+<script>
+const codeReader = new ZXing.BrowserMultiFormatReader();
+let selectedDeviceId = null;
+
+async function startScanner() {
+    try {
+        const devices = await codeReader.listVideoInputDevices();
+
+        if (devices.length === 0) {
+            alert("No camera found.");
+            return;
+        }
+
+        // Prefer rear camera on phones
+        const rearCamera =
+            devices.find(device =>
+                device.label.toLowerCase().includes("back")
+            ) || devices[0];
+
+        selectedDeviceId = rearCamera.deviceId;
+
+        codeReader.decodeFromVideoDevice(
+            selectedDeviceId,
+            "video",
+            (result, err) => {
+                if (result) {
+                    document.getElementById("result").textContent =
+                        "Detected: " + result.getText();
+                }
+            }
+        );
+
+    } catch (error) {
+        console.error(error);
+        alert("Camera access failed.");
+    }
+}
+
+function stopScanner() {
+    codeReader.reset();
+}
+
+document.getElementById("startBtn")
+    .addEventListener("click", startScanner);
+
+document.getElementById("stopBtn")
+    .addEventListener("click", stopScanner);
+</script>
+
+</body>
+</html>
