@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barcode Scanner with Beep</title>
+<title>Barcode Inventory Scanner</title>
 
 <script src="https://unpkg.com/@zxing/library@latest"></script>
 
 <style>
 body{
     font-family:Arial,sans-serif;
-    background:#f5f5f5;
-    text-align:center;
+    background:#f4f4f4;
+    margin:0;
     padding:20px;
 }
 
 .container{
-    max-width:800px;
+    max-width:900px;
     margin:auto;
     background:white;
     padding:20px;
@@ -24,56 +24,115 @@ body{
     box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
+h1,h2{
+    text-align:center;
+}
+
 video{
     width:100%;
     max-width:700px;
+    display:block;
+    margin:auto;
     border:2px solid #ddd;
     border-radius:10px;
 }
 
+.controls{
+    text-align:center;
+    margin:15px 0;
+}
+
 button{
     padding:12px 20px;
-    margin:10px;
-    font-size:16px;
+    margin:5px;
     border:none;
     border-radius:6px;
-    cursor:pointer;
     background:#0078ff;
     color:white;
+    font-size:16px;
+    cursor:pointer;
 }
 
 button:hover{
     background:#005fd1;
 }
 
-#result{
-    margin-top:20px;
-    font-size:22px;
-    font-weight:bold;
-    color:green;
-    word-break:break-all;
+#status{
+    text-align:center;
+    color:#666;
+    margin:10px 0;
 }
 
-#status{
-    margin-top:10px;
-    color:#666;
+#result{
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:green;
+    margin:15px 0;
+}
+
+.summary{
+    text-align:center;
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+}
+
+th{
+    background:#0078ff;
+    color:white;
+}
+
+tr:nth-child(even){
+    background:#f9f9f9;
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📷 Barcode Scanner</h1>
+
+    <h1>📦 Barcode Inventory Scanner</h1>
 
     <video id="video" autoplay muted playsinline></video>
 
-    <div>
+    <div class="controls">
         <button onclick="startScanner()">Start Scanner</button>
         <button onclick="stopScanner()">Stop Scanner</button>
+        <button onclick="clearItems()">Clear Items</button>
     </div>
 
     <div id="status">Camera not started.</div>
     <div id="result">No barcode detected.</div>
+
+    <div class="summary">
+        <strong>Total Items:</strong>
+        <span id="totalItems">0</span>
+    </div>
+
+    <h2>Scanned Items</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Barcode</th>
+            </tr>
+        </thead>
+        <tbody id="inventoryTable"></tbody>
+    </table>
+
 </div>
 
 <script>
@@ -81,6 +140,15 @@ const codeReader = new ZXing.BrowserMultiFormatReader();
 
 let lastCode = "";
 let lastScanTime = 0;
+let totalItems = 0;
+
+// Example products
+const products = {
+    "123456789012": "Coca-Cola",
+    "987654321098": "Chocolate Bar",
+    "111222333444": "Bottle of Water",
+    "555666777888": "Bag of Crisps"
+};
 
 function playBeep() {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -91,8 +159,8 @@ function playBeep() {
     oscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 
-    oscillator.frequency.value = 1200;
     oscillator.type = "square";
+    oscillator.frequency.value = 1200;
 
     oscillator.start();
 
@@ -105,66 +173,113 @@ function playBeep() {
     oscillator.stop(audioCtx.currentTime + 0.12);
 }
 
-async function startScanner() {
-    try {
-        document.getElementById("status").textContent =
-            "Requesting camera access...";
+function addItem(barcode) {
 
-        const devices = await codeReader.listVideoInputDevices();
+    const productName =
+        products[barcode] || "Unknown Product";
+
+    totalItems++;
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${totalItems}</td>
+        <td>${productName}</td>
+        <td>${barcode}</td>
+    `;
+
+    document
+        .getElementById("inventoryTable")
+        .appendChild(row);
+
+    document
+        .getElementById("totalItems")
+        .textContent = totalItems;
+}
+
+async function startScanner() {
+
+    try {
+
+        document.getElementById("status").textContent =
+            "Starting camera...";
+
+        const devices =
+            await codeReader.listVideoInputDevices();
 
         if (!devices.length) {
             alert("No camera found.");
             return;
         }
 
-        const rearCamera =
-            devices.find(d =>
-                d.label.toLowerCase().includes("back")
+        const camera =
+            devices.find(device =>
+                device.label.toLowerCase().includes("back")
             ) || devices[0];
 
         document.getElementById("status").textContent =
-            "Scanner running...";
+            "Scanner running.";
 
         codeReader.decodeFromVideoDevice(
-            rearCamera.deviceId,
+            camera.deviceId,
             "video",
             (result, err) => {
+
                 if (result) {
 
-                    const code = result.getText();
+                    const barcode = result.getText();
                     const now = Date.now();
 
                     if (
-                        code !== lastCode ||
+                        barcode !== lastCode ||
                         now - lastScanTime > 3000
                     ) {
-                        lastCode = code;
+
+                        lastCode = barcode;
                         lastScanTime = now;
 
-                        document.getElementById("result").textContent =
-                            "Detected: " + code;
+                        document.getElementById("result")
+                            .textContent =
+                            "Detected: " + barcode;
 
                         playBeep();
+                        addItem(barcode);
                     }
                 }
             }
         );
 
-    } catch (error) {
+    } catch(error) {
+
         console.error(error);
-        document.getElementById("status").textContent =
+
+        document.getElementById("status")
+            .textContent =
             "Camera access failed.";
     }
 }
 
 function stopScanner() {
+
     codeReader.reset();
 
-    document.getElementById("status").textContent =
+    document.getElementById("status")
+        .textContent =
         "Scanner stopped.";
+}
 
-    document.getElementById("result").textContent =
-        "No barcode detected.";
+function clearItems() {
+
+    document.getElementById("inventoryTable")
+        .innerHTML = "";
+
+    totalItems = 0;
+
+    document.getElementById("totalItems")
+        .textContent = "0";
+
+    document.getElementById("result")
+        .textContent = "No barcode detected.";
 }
 </script>
 
