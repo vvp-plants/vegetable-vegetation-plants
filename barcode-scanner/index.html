@@ -116,8 +116,11 @@ tr:nth-child(even){
     <div class="controls">
         <button onclick="startScanner()">Start Scanner</button>
         <button onclick="stopScanner()">Stop Scanner</button>
+        <button onclick="switchCamera()">Switch Camera</button>
         <button onclick="clearItems()">Clear Items</button>
-        <button onclick="exportCSV()">Export to CSV</button>
+        <button onclick="exportCSV()">Export CSV</button>
+        <button onclick="applyCoupon()">Add Coupon</button>
+        <button onclick="payNow()">Pay</button>
     </div>
 
     <div id="status">Camera not started.</div>
@@ -128,6 +131,7 @@ tr:nth-child(even){
         <div><strong>Subtotal (£):</strong> <span id="subtotal">0.00</span></div>
         <div><strong>VAT (20%) (£):</strong> <span id="vat">0.00</span></div>
         <div><strong>Total (£):</strong> <span id="totalCost">0.00</span></div>
+        <div><strong>Coupon Applied:</strong> <span id="couponText">None</span></div>
     </div>
 
     <h2>Scanned Items</h2>
@@ -153,17 +157,21 @@ let lastCode = "";
 let lastScanTime = 0;
 let totalItems = 0;
 let subtotal = 0;
+let couponValue = 0;
+let couponType = null;
 
-// Example products with prices
-// If not found locally, we’ll try a live price lookup.
+let cameras = [];
+let currentCameraIndex = 0;
+
+const VAT_RATE = 0.20;
+
+// Example products
 const products = {
     "123456789012": { name: "Coca-Cola", price: 1.20 },
     "987654321098": { name: "Chocolate Bar", price: 0.85 },
     "111222333444": { name: "Bottle of Water", price: 0.99 },
     "555666777888": { name: "Bag of Crisps", price: 1.10 }
 };
-
-const VAT_RATE = 0.20;
 
 function playBeep() {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -183,45 +191,39 @@ function playBeep() {
 }
 
 function updateTotals() {
-    const vat = subtotal * VAT_RATE;
-    const total = subtotal + vat;
+    let discountedSubtotal = subtotal;
 
-    document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+    if (couponType === "%") {
+        discountedSubtotal -= (subtotal * (couponValue / 100));
+    } else if (couponType === "£") {
+        discountedSubtotal -= couponValue;
+    }
+
+    if (discountedSubtotal < 0) discountedSubtotal = 0;
+
+    const vat = discountedSubtotal * VAT_RATE;
+    const total = discountedSubtotal + vat;
+
+    document.getElementById("subtotal").textContent = discountedSubtotal.toFixed(2);
     document.getElementById("vat").textContent = vat.toFixed(2);
     document.getElementById("totalCost").textContent = total.toFixed(2);
     document.getElementById("totalItems").textContent = totalItems;
 }
 
-// Placeholder live price lookup from an API
-// Replace URL and logic with your real API.
 async function fetchLivePrice(barcode) {
-    try {
-        // Example stub: simulate API delay and random price
-        await new Promise(resolve => setTimeout(resolve, 300)); // simulate latency
-
-        // In a real app, you might do:
-        // const res = await fetch(`https://your-price-api.com/price?barcode=${barcode}`);
-        // const data = await res.json();
-        // return { name: data.name, price: data.price };
-
-        // For now, return a fake product
-        return {
-            name: "Live Product " + barcode,
-            price: (Math.random() * 5 + 0.5).toFixed(2) * 1
-        };
-    } catch (e) {
-        console.error("Live price lookup failed", e);
-        return { name: "Unknown Product", price: 0.00 };
-    }
+    await new Promise(resolve => setTimeout(resolve, 300));
+    return {
+        name: "Live Product " + barcode,
+        price: (Math.random() * 5 + 0.5).toFixed(2) * 1
+    };
 }
 
 async function addItem(barcode) {
     let product = products[barcode];
 
     if (!product) {
-        // Try live lookup if not in local list
         product = await fetchLivePrice(barcode);
-        products[barcode] = product; // cache it
+        products[barcode] = product;
     }
 
     totalItems++;
@@ -243,41 +245,52 @@ async function startScanner() {
     try {
         document.getElementById("status").textContent = "Starting camera...";
 
-        const devices = await codeReader.listVideoInputDevices();
+        cameras = await codeReader.listVideoInputDevices();
 
-        if (!devices.length) {
+        if (!cameras.length) {
             alert("No camera found.");
-            document.getElementById("status").textContent = "No camera found.";
             return;
         }
 
-        const camera =
-            devices.find(device => device.label.toLowerCase().includes("back")) ||
-            devices[0];
-
-        document.getElementById("status").textContent = "Scanner running.";
-
-        codeReader.decodeFromVideoDevice(camera.deviceId, "video", async (result, err) => {
-            if (result) {
-                const barcode = result.getText();
-                const now = Date.now();
-
-                if (barcode !== lastCode || now - lastScanTime > 3000) {
-                    lastCode = barcode;
-                    lastScanTime = now;
-
-                    document.getElementById("result").textContent = "Detected: " + barcode;
-
-                    playBeep();
-                    await addItem(barcode);
-                }
-            }
-        });
+        startCamera(cameras[currentCameraIndex].deviceId);
 
     } catch (error) {
         console.error(error);
         document.getElementById("status").textContent = "Camera access failed.";
     }
+}
+
+function startCamera(deviceId) {
+    document.getElementById("status").textContent = "Scanner running.";
+
+    codeReader.decodeFromVideoDevice(deviceId, "video", async (result, err) => {
+        if (result) {
+            const barcode = result.getText();
+            const now = Date.now();
+
+            if (barcode !== lastCode || now - lastScanTime > 3000) {
+                lastCode = barcode;
+                lastScanTime = now;
+
+                document.getElementById("result").textContent = "Detected: " + barcode;
+
+                playBeep();
+                await addItem(barcode);
+            }
+        }
+    });
+}
+
+function switchCamera() {
+    if (!cameras.length) return;
+
+    currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
+
+    codeReader.reset();
+    startCamera(cameras[currentCameraIndex].deviceId);
+
+    document.getElementById("status").textContent =
+        "Switched to camera: " + cameras[currentCameraIndex].label;
 }
 
 function stopScanner() {
@@ -289,26 +302,45 @@ function clearItems() {
     document.getElementById("inventoryTable").innerHTML = "";
     totalItems = 0;
     subtotal = 0;
-    lastCode = "";
-    lastScanTime = 0;
+    couponValue = 0;
+    couponType = null;
 
-    document.getElementById("totalItems").textContent = "0";
-    document.getElementById("subtotal").textContent = "0.00";
-    document.getElementById("vat").textContent = "0.00";
-    document.getElementById("totalCost").textContent = "0.00";
+    document.getElementById("couponText").textContent = "None";
+
+    updateTotals();
     document.getElementById("result").textContent = "No barcode detected.";
 }
 
-// Export table to CSV
+function applyCoupon() {
+    const input = prompt("Enter coupon (e.g., 10% or 2.50):");
+
+    if (!input) return;
+
+    if (input.includes("%")) {
+        couponType = "%";
+        couponValue = parseFloat(input.replace("%", ""));
+        document.getElementById("couponText").textContent = couponValue + "%";
+    } else {
+        couponType = "£";
+        couponValue = parseFloat(input);
+        document.getElementById("couponText").textContent = "£" + couponValue.toFixed(2);
+    }
+
+    updateTotals();
+}
+
+function payNow() {
+    const total = document.getElementById("totalCost").textContent;
+    alert("Payment Complete!\n\nTotal Paid: £" + total);
+}
+
 function exportCSV() {
     const rows = [];
     const table = document.getElementById("inventoryTable");
     const trs = table.querySelectorAll("tr");
 
-    // Header
     rows.push(["#", "Product", "Barcode", "Price (£)"]);
 
-    // Rows
     trs.forEach(tr => {
         const cells = tr.querySelectorAll("td");
         const row = [];
@@ -316,11 +348,11 @@ function exportCSV() {
         rows.push(row);
     });
 
-    // Add summary row
     rows.push([]);
     rows.push(["Total Items", totalItems]);
     rows.push(["Subtotal (£)", subtotal.toFixed(2)]);
-    rows.push(["VAT (20%) (£)", (subtotal * VAT_RATE).toFixed(2)]);
+    rows.push(["Coupon", couponType ? couponValue + couponType : "None"]);
+    rows.push(["VAT (£)", (subtotal * VAT_RATE).toFixed(2)]);
     rows.push(["Total (£)", (subtotal * (1 + VAT_RATE)).toFixed(2)]);
 
     let csvContent = "";
