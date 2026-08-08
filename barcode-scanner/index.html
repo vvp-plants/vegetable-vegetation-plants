@@ -98,6 +98,7 @@ tr:nth-child(even){
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -152,7 +153,6 @@ const products = {
 
 function playBeep() {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
 
@@ -163,49 +163,31 @@ function playBeep() {
     oscillator.frequency.value = 1200;
 
     oscillator.start();
-
     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(
-        0.001,
-        audioCtx.currentTime + 0.12
-    );
-
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
     oscillator.stop(audioCtx.currentTime + 0.12);
 }
 
 function addItem(barcode) {
-
-    const productName =
-        products[barcode] || "Unknown Product";
-
+    const productName = products[barcode] || "Unknown Product";
     totalItems++;
 
     const row = document.createElement("tr");
-
     row.innerHTML = `
         <td>${totalItems}</td>
         <td>${productName}</td>
         <td>${barcode}</td>
     `;
 
-    document
-        .getElementById("inventoryTable")
-        .appendChild(row);
-
-    document
-        .getElementById("totalItems")
-        .textContent = totalItems;
+    document.getElementById("inventoryTable").appendChild(row);
+    document.getElementById("totalItems").textContent = totalItems;
 }
 
 async function startScanner() {
-
     try {
+        document.getElementById("status").textContent = "Starting camera...";
 
-        document.getElementById("status").textContent =
-            "Starting camera...";
-
-        const devices =
-            await codeReader.listVideoInputDevices();
+        const devices = await codeReader.listVideoInputDevices();
 
         if (!devices.length) {
             alert("No camera found.");
@@ -213,73 +195,44 @@ async function startScanner() {
         }
 
         const camera =
-            devices.find(device =>
-                device.label.toLowerCase().includes("back")
-            ) || devices[0];
+            devices.find(device => device.label.toLowerCase().includes("back")) ||
+            devices[0];
 
-        document.getElementById("status").textContent =
-            "Scanner running.";
+        document.getElementById("status").textContent = "Scanner running.";
 
-        codeReader.decodeFromVideoDevice(
-            camera.deviceId,
-            "video",
-            (result, err) => {
+        codeReader.decodeFromVideoDevice(camera.deviceId, "video", (result, err) => {
+            if (result) {
+                const barcode = result.getText();
+                const now = Date.now();
 
-                if (result) {
+                if (barcode !== lastCode || now - lastScanTime > 3000) {
+                    lastCode = barcode;
+                    lastScanTime = now;
 
-                    const barcode = result.getText();
-                    const now = Date.now();
+                    document.getElementById("result").textContent = "Detected: " + barcode;
 
-                    if (
-                        barcode !== lastCode ||
-                        now - lastScanTime > 3000
-                    ) {
-
-                        lastCode = barcode;
-                        lastScanTime = now;
-
-                        document.getElementById("result")
-                            .textContent =
-                            "Detected: " + barcode;
-
-                        playBeep();
-                        addItem(barcode);
-                    }
+                    playBeep();
+                    addItem(barcode);
                 }
             }
-        );
+        });
 
-    } catch(error) {
-
+    } catch (error) {
         console.error(error);
-
-        document.getElementById("status")
-            .textContent =
-            "Camera access failed.";
+        document.getElementById("status").textContent = "Camera access failed.";
     }
 }
 
 function stopScanner() {
-
     codeReader.reset();
-
-    document.getElementById("status")
-        .textContent =
-        "Scanner stopped.";
+    document.getElementById("status").textContent = "Scanner stopped.";
 }
 
 function clearItems() {
-
-    document.getElementById("inventoryTable")
-        .innerHTML = "";
-
+    document.getElementById("inventoryTable").innerHTML = "";
     totalItems = 0;
-
-    document.getElementById("totalItems")
-        .textContent = "0";
-
-    document.getElementById("result")
-        .textContent = "No barcode detected.";
+    document.getElementById("totalItems").textContent = "0";
+    document.getElementById("result").textContent = "No barcode detected.";
 }
 </script>
 
