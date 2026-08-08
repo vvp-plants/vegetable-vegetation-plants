@@ -2,551 +2,138 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barcode Inventory Scanner</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>POS Scanner Pro</title>
 <script src="https://unpkg.com/@zxing/library@0.21.3"></script>
-
 <style>
-:root{
-    --bg:#f4f4f4;
-    --card:#ffffff;
-    --text:#222;
-    --muted:#666;
-    --primary:#0078ff;
-    --success:#0b9b3e;
-}
-
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-}
-
-body.dark{
-    --bg:#111827;
-    --card:#1f2937;
-    --text:#f3f4f6;
-    --muted:#cbd5e1;
-    --primary:#3b82f6;
-}
-
-.container{
-    max-width:1100px;
-    margin:20px auto;
-    padding:20px;
-    background:var(--card);
-    border-radius:12px;
-    box-shadow:0 4px 20px rgba(0,0,0,.1);
-}
-
-h1{
-    text-align:center;
-}
-
-video{
-    width:100%;
-    max-height:420px;
-    background:#000;
-    border-radius:10px;
-}
-
-.controls{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    margin:15px 0;
-}
-
-button{
-    border:none;
-    border-radius:8px;
-    padding:10px 14px;
-    cursor:pointer;
-    background:var(--primary);
-    color:#fff;
-}
-
-.secondary{
-    background:#e5e7eb;
-    color:#111;
-}
-
-.status,.result{
-    text-align:center;
-    margin:10px 0;
-}
-
-.summary{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    justify-content:center;
-    margin:20px 0;
-}
-
-.summary-card{
-    padding:10px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    min-width:140px;
-    text-align:center;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-th,td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-}
-
-th{
-    background:var(--primary);
-    color:white;
-}
-
-.small{
-    color:var(--muted);
-    font-size:13px;
-}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f4f4}
+header{background:#0b6cff;color:#fff;padding:12px;text-align:center}
+.wrap{max-width:1100px;margin:auto;padding:15px}
+.card{background:#fff;padding:15px;border-radius:10px;margin-bottom:15px}
+video{width:100%;max-height:320px;background:#000}
+button{padding:8px 12px;margin:4px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ddd;padding:6px}
 </style>
 </head>
 <body>
-
-<div class="container">
-
-<h1>📦 Barcode Inventory Scanner</h1>
-
-<video id="video" autoplay muted playsinline></video>
-
-<div class="controls">
-    <button id="startBtn">Start Scanner</button>
-    <button id="stopBtn" class="secondary">Stop Scanner</button>
-    <button id="switchBtn" class="secondary">Switch Camera</button>
-    <button id="clearBtn" class="secondary">Clear Items</button>
-    <button id="exportBtn" class="secondary">Export CSV</button>
-    <button id="couponBtn" class="secondary">Coupon</button>
-    <button id="receiptBtn" class="secondary">Print Receipt</button>
-    <button id="soundBtn" class="secondary">Sound On</button>
-    <button id="darkBtn" class="secondary">Dark Mode</button>
+<header><h1>POS Scanner Pro</h1></header>
+<div class="wrap">
+<div class="card">
+<video id="video" autoplay muted playsinline></video><br>
+<button onclick="startScanner()">Start Scanner</button>
+<button onclick="stopScanner()">Stop Scanner</button>
+<button onclick="switchCamera()">Switch Camera</button>
+<button onclick="printReceipt()">Print Receipt</button>
+<button onclick="clearCart()">Clear Items</button>
+<div id="status">Ready</div>
 </div>
 
-<div class="status" id="status">
-    Camera not started.
-</div>
-
-<div class="result" id="result">
-    No barcode detected.
-</div>
-
-<div class="summary">
-    <div class="summary-card">
-        <div class="small">Items</div>
-        <div id="totalItems">0</div>
-    </div>
-
-    <div class="summary-card">
-        <div class="small">Subtotal (£)</div>
-        <div id="subtotal">0.00</div>
-    </div>
-
-    <div class="summary-card">
-        <div class="small">VAT (£)</div>
-        <div id="vat">0.00</div>
-    </div>
-
-    <div class="summary-card">
-        <div class="small">Total (£)</div>
-        <div id="total">0.00</div>
-    </div>
-</div>
-
-<h2>Scanned Items</h2>
-
+<div class="card">
 <table>
-<thead>
-<tr>
-<th>#</th>
-<th>Product</th>
-<th>Barcode</th>
-<th>Price (£)</th>
-</tr>
-</thead>
-<tbody id="inventoryTable"></tbody>
+<thead><tr><th>Product</th><th>Qty</th><th>Price</th></tr></thead>
+<tbody id="cart"></tbody>
 </table>
-
+<p>Total Items: <span id="count">0</span></p>
+<p>Total: £<span id="grandTotal">0.00</span></p>
+</div>
 </div>
 
 <script>
-const codeReader = new ZXing.BrowserMultiFormatReader();
-
-let cameras = [];
-let cameraIndex = 0;
-let scanning = false;
-
-let items = [];
-let subtotal = 0;
-
-let couponType = null;
-let couponValue = 0;
-
-let visibleBarcode = null;
-let autoTimer = null;
-
-let soundEnabled = true;
-
-const VAT_RATE = 0.20;
-
-const products = {
-    "123456789012": {name:"Coca-Cola",price:1.20},
-    "987654321098": {name:"Chocolate Bar",price:0.85},
-    "111222333444": {name:"Bottle of Water",price:0.99},
-    "555666777888": {name:"Bag of Crisps",price:1.10}
+const reader=new ZXing.BrowserMultiFormatReader();
+const products={
+ "123456789012":{name:"Coca-Cola",price:1.20},
+ "987654321098":{name:"Chocolate Bar",price:0.85}
 };
+let cart=[];
+let cameras=[];
+let currentCamera=0;
+let barcodeVisible=false;
+let lastBarcode=null;
 
-function beep(){
-    if(!soundEnabled) return;
-
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    osc.frequency.value = 1200;
-    osc.start();
-
-    gain.gain.setValueAtTime(.25,ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime + .1
-    );
-
-    osc.stop(ctx.currentTime + .1);
+function render(){
+ const tb=document.getElementById('cart');
+ tb.innerHTML='';
+ let count=0,total=0;
+ cart.forEach(i=>{
+   count+=i.qty;
+   total+=i.qty*i.price;
+   tb.innerHTML+=`<tr><td>${i.name}</td><td>${i.qty}</td><td>£${(i.qty*i.price).toFixed(2)}</td></tr>`;
+ });
+ countEl.textContent=count;
+ grandTotal.textContent=total.toFixed(2);
 }
 
-function saveState(){
-    localStorage.setItem(
-        "barcodeScanner",
-        JSON.stringify({
-            items,
-            subtotal,
-            couponType,
-            couponValue,
-            darkMode:document.body.classList.contains("dark")
-        })
-    );
-}
-
-function loadState(){
-    const raw = localStorage.getItem("barcodeScanner");
-    if(!raw) return;
-
-    const state = JSON.parse(raw);
-
-    items = state.items || [];
-    subtotal = state.subtotal || 0;
-    couponType = state.couponType;
-    couponValue = state.couponValue || 0;
-
-    items.forEach((item,index)=>{
-        appendRow(index+1,item.name,item.barcode,item.price);
-    });
-
-    updateTotals();
-
-    if(state.darkMode){
-        document.body.classList.add("dark");
-    }
-}
-
-function appendRow(index,name,barcode,price){
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-        <td>${index}</td>
-        <td>${name}</td>
-        <td>${barcode}</td>
-        <td>£${price.toFixed(2)}</td>
-    `;
-
-    inventoryTable.appendChild(row);
-}
-
-function updateTotals(){
-
-    let discounted = subtotal;
-
-    if(couponType === "%"){
-        discounted -= discounted * (couponValue/100);
-    }
-
-    if(couponType === "£"){
-        discounted -= couponValue;
-    }
-
-    if(discounted < 0){
-        discounted = 0;
-    }
-
-    const vat = discounted * VAT_RATE;
-    const total = discounted + vat;
-
-    totalItems.textContent = items.length;
-    subtotalEl.textContent = discounted.toFixed(2);
-    vatEl.textContent = vat.toFixed(2);
-    totalEl.textContent = total.toFixed(2);
-}
-
-async function addItem(barcode){
-
-    let product = products[barcode];
-
-    if(!product){
-        product = {
-            name:"Product " + barcode,
-            price:+(Math.random()*5+0.5).toFixed(2)
-        };
-    }
-
-    items.push({
-        barcode,
-        name:product.name,
-        price:product.price
-    });
-
-    subtotal += product.price;
-
-    appendRow(
-        items.length,
-        product.name,
-        barcode,
-        product.price
-    );
-
-    updateTotals();
-    saveState();
-    beep();
-}
-
-function startAutoScan(){
-
-    if(autoTimer) return;
-
-    addItem(visibleBarcode);
-
-    autoTimer = setInterval(()=>{
-        if(visibleBarcode){
-            addItem(visibleBarcode);
-        }
-    },3000);
-}
-
-function stopAutoScan(){
-    clearInterval(autoTimer);
-    autoTimer = null;
+function addItem(name,price){
+ let e=cart.find(x=>x.name===name);
+ if(e)e.qty++;
+ else cart.push({name,price,qty:1});
+ render();
 }
 
 async function startScanner(){
-
-    cameras = await codeReader.listVideoInputDevices();
-
-    if(!cameras.length){
-        alert("No camera found");
-        return;
-    }
-
-    scanning = true;
-
-    codeReader.decodeFromVideoDevice(
-        cameras[cameraIndex].deviceId,
-        video,
-        (result)=>{
-            if(result){
-
-                const code = result.getText();
-
-                resultDiv.textContent =
-                    "Detected: " + code;
-
-                if(code !== visibleBarcode){
-                    visibleBarcode = code;
-                    startAutoScan();
-                }
-            }
-        }
-    );
-
-    status.textContent = "Scanner running";
+ cameras=await reader.listVideoInputDevices();
+ if(!cameras.length){status.textContent='No camera found';return;}
+ runCamera();
 }
 
-function stopScanner(){
-
-    codeReader.reset();
-
-    scanning = false;
-    visibleBarcode = null;
-
-    stopAutoScan();
-
-    status.textContent = "Scanner stopped";
+function runCamera(){
+ reader.decodeFromVideoDevice(cameras[currentCamera].deviceId,video,(result)=>{
+   if(result){
+      const code=result.getText();
+      if(!barcodeVisible || code!==lastBarcode){
+        barcodeVisible=true;
+        lastBarcode=code;
+        const p=products[code]||{name:'Product '+code,price:1};
+        addItem(p.name,p.price);
+      }
+   } else {
+      barcodeVisible=false;
+      lastBarcode=null;
+   }
+ });
+ status.textContent='Scanner running - Camera '+(currentCamera+1);
 }
 
 function switchCamera(){
-
-    if(cameras.length < 2){
-        alert("Only one camera available");
-        return;
-    }
-
-    cameraIndex =
-        (cameraIndex + 1) % cameras.length;
-
-    stopScanner();
-    startScanner();
+ if(cameras.length<2){alert('Only one camera available');return;}
+ reader.reset();
+ currentCamera=(currentCamera+1)%cameras.length;
+ barcodeVisible=false;
+ lastBarcode=null;
+ runCamera();
 }
 
-function clearItems(){
-
-    if(!confirm("Clear all items?")) return;
-
-    items = [];
-    subtotal = 0;
-
-    inventoryTable.innerHTML = "";
-
-    updateTotals();
-    saveState();
+function stopScanner(){
+ try{reader.reset();}catch(e){}
+ barcodeVisible=false;
+ lastBarcode=null;
+ status.textContent='Scanner stopped';
 }
 
-function exportCSV(){
-
-    let csv = "No,Product,Barcode,Price\n";
-
-    items.forEach((item,index)=>{
-        csv +=
-            `${index+1},"${item.name}",${item.barcode},${item.price}\n`;
-    });
-
-    const blob = new Blob(
-        [csv],
-        {type:"text/csv"}
-    );
-
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "inventory.csv";
-    a.click();
-
-    URL.revokeObjectURL(url);
-}
+function clearCart(){cart=[];render();}
 
 function printReceipt(){
-
-    const w = window.open("");
-
-    let html = `
-    <html>
-    <body>
-    <h2>Receipt</h2>
-    <hr>
-    `;
-
-    items.forEach((item,index)=>{
-        html += `
-        <p>
-        ${index+1}.
-        ${item.name}
-        - £${item.price.toFixed(2)}
-        </p>
-        `;
-    });
-
-    html += `
-    <hr>
-    <p>Items: ${items.length}</p>
-    <p>Subtotal: £${subtotal.toFixed(2)}</p>
-    </body>
-    </html>
-    `;
-
-    w.document.write(html);
-    w.print();
+ let total=cart.reduce((s,i)=>s+i.qty*i.price,0);
+ let receiptNo='RCP-'+Date.now();
+ let rows=cart.map(i=>`<tr><td>${i.name}</td><td>${i.qty}</td><td>£${(i.qty*i.price).toFixed(2)}</td></tr>`).join('');
+ let w=window.open('','_blank');
+ w.document.write(`
+ <html><head><title>Receipt</title>
+ <style>body{font-family:Arial;padding:20px}table{width:100%;border-collapse:collapse}td,th{border:1px solid #ccc;padding:6px}</style>
+ </head><body>
+ <h2>Store Receipt</h2>
+ <p>Receipt: ${receiptNo}</p>
+ <p>Date: ${new Date().toLocaleString()}</p>
+ <table><tr><th>Item</th><th>Qty</th><th>Total</th></tr>${rows}</table>
+ <h3>Grand Total: £${total.toFixed(2)}</h3>
+ <p>Thank you for your purchase.</p>
+ </body></html>`);
+ w.document.close();
+ w.print();
 }
-
-function applyCoupon(){
-
-    const value =
-        prompt("Enter coupon (10% or 2.50)");
-
-    if(!value){
-        couponType = null;
-        couponValue = 0;
-    }
-    else if(value.includes("%")){
-        couponType = "%";
-        couponValue = parseFloat(value);
-    }
-    else{
-        couponType = "£";
-        couponValue = parseFloat(value);
-    }
-
-    updateTotals();
-    saveState();
-}
-
-const video = document.getElementById("video");
-const inventoryTable =
-    document.getElementById("inventoryTable");
-
-const status =
-    document.getElementById("status");
-
-const resultDiv =
-    document.getElementById("result");
-
-const totalItems =
-    document.getElementById("totalItems");
-
-const subtotalEl =
-    document.getElementById("subtotal");
-
-const vatEl =
-    document.getElementById("vat");
-
-const totalEl =
-    document.getElementById("total");
-
-startBtn.onclick = startScanner;
-stopBtn.onclick = stopScanner;
-switchBtn.onclick = switchCamera;
-clearBtn.onclick = clearItems;
-exportBtn.onclick = exportCSV;
-receiptBtn.onclick = printReceipt;
-couponBtn.onclick = applyCoupon;
-
-soundBtn.onclick = ()=>{
-    soundEnabled = !soundEnabled;
-    soundBtn.textContent =
-        soundEnabled ? "Sound On" : "Sound Off";
-};
-
-darkBtn.onclick = ()=>{
-    document.body.classList.toggle("dark");
-    saveState();
-};
-
-loadState();
+const countEl=document.getElementById('count');
+render();
 </script>
-
 </body>
 </html>
