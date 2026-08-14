@@ -53,25 +53,123 @@ th,td{border:1px solid #ddd;padding:6px}
 const reader = new ZXing.BrowserMultiFormatReader();
 let cameras = [];
 let currentCamera = 0;
-
-const products = {
-  "19669609256": {name:"christams kitchen garden standard gift seed starter kit", price:12.99},
-  "56439998765": {name:"Little bloom box standard gift seed starter kit", price:12.99}
-  "0424680204": {name:"Mums little garden standard gift seed starter kit", price:12.99}
-  "612347983": {name:"Dads kitchen garden standard gift seed starter kit", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-  "rep num": {name:"rep name", price:12.99}
-
   
-};
+const products = {
+  /* Vegetables & Salad */
+  "843920155012": { name: "Tomato (Golden Queen)", price: 2.5 },
+  "129553880144": { name: "Tomato (Calabrese)", price: 2.5 },
+  "559201448392": { name: "Tomato (Costoluto Fiorentino)", price: 2.0 },
+  "903311559204": { name: "Tomato (Gigolo)", price: 2.5 },
+  "440129553801": { name: "Tomato (Red Cherry)", price: 2.5 },
+  "992014483920": { name: "Radish (Neon)", price: 2.5 },
+  "551203994820": { name: "Radish (French Breakfast)", price: 2.5 },
+  "120399482015": { name: "Carrot (Chantenay Red Cored)", price: 1.5 },
+  "883920155012": { name: "Carrot (Nantes)", price: 2.5 },
+  "441203994820": { name: "Carrot (Cosmic Purple)", price: 2.5 },
+  "559201448301": { name: "Beetroot (Rainbow Beet)", price: 2.0 },
+  "903311559201": { name: "Beetroot (Detroit)", price: 2.5 },
+  "440129553899": { name: "Spinach (Perpetual)", price: 2.5 },
+  "992014483955": { name: "Rocket (Cultivated)", price: 2.0 },
+  "551203994899": { name: "Red Lettuce (Salad Bowl)", price: 2.5 },
+  "120399482099": { name: "Swiss Chard (Mixed)", price: 3.0 },
+  "883920155099": { name: "Curly Kale (Nero Di Toscana)", price: 3.0 },
+  "441203994899": { name: "Cauliflower (All Season)", price: 2.5 },
+  "559201448355": { name: "Broccoli (Calabrese)", price: 2.5 },
+  "903311559255": { name: "Cabbage (Brunswick)", price: 3.0 },
+  "440129553855": { name: "French Bean (Provider)", price: 2.5 },
+  "992014483901": { name: "Broad Bean", price: 2.0 },
+  "551203994801": { name: "Pea", price: 2.0 },
+  "120399482001": { name: "Cucumber (Marketmore)", price: 3.0 },
+  "883920155001": { name: "Aubergine (Black Beauty)", price: 3.0 },
+  "441203994801": { name: "Sweet Pepper (Macaroni Rosso)", price: 3.5 },
+  "559201448301": { name: "Hot Pepper (Anaheim)", price: 3.0 },
+  "903311559301": { name: "Hot Pepper (Atlantic Crow)", price: 2.5 },
+  "440129553801": { name: "Hot Pepper (Cayenne)", price: 3.5 },
 
-let cart = [];
+  /* Herbs */
+  "992014483800": { name: "Parsley", price: 2.5 },
+  "551203994800": { name: "Basil (Genovese)", price: 2.5 },
+  "120399482800": { name: "Chives", price: 2.0 },
+  "883920155800": { name: "Rosemary", price: 2.0 },
+  "441203994800": { name: "Sorrel (Garden)", price: 2.5 },
+  "559201448800": { name: "Lavender", price: 2.0 },
+  "903311559800": { name: "Dill (Bouquet)", price: 1.5 },
+  "440129553800": { name: "Coriander", price: 2.3 },
+
+  /* Flowers */
+  "992014483700": { name: "Sweet Pea (Mixed)", price: 2.0 },
+  "551203994700": { name: "Sunflower (Little)", price: 1.5 },
+  "120399482700": { name: "Sunflower (Big)", price: 2.0 },
+  "883920155700": { name: "Forget-me-not", price: 2.0 },
+  "441203994700": { name: "Cornflower (Blue Ball)", price: 3.0 },
+  "559201448700": { name: "Nigella (Persian Jewels)", price: 2.5 },
+  "903311559700": { name: "Iris", price: 2.0 },
+
+  /* Seed Starter Boxes – Standard */
+  "400001559201": { name: "christams kitchen garden standard", price: 12.99 },
+  "400002559202": { name: "spring / easter standard", price: 12.99 },
+  "400003559203": { name: "mothers day standard", price: 12.99 },
+  "400004559204": { name: "fathers day standard", price: 12.99 },
+  "400005559205": { name: "summer standard", price: 12.99 },
+  "400006559206": { name: "halloween standard", price: 12.99 },
+  "400007559207": { name: "end of school standard", price: 12.99 },
+  "400008559208": { name: "teacher gifts standard", price: 12.99 },
+  "400009559209": { name: "valentines day standard", price: 12.99 },
+  "400010559210": { name: "birthday edition standard", price: 12.99 },
+  "400011559211": { name: "eco / sustaiability theme standard", price: 12.99 },
+  "400012559212": { name: "kitchen gardeen kit standard", price: 12.99 },
+  "400013559213": { name: "bee friendly flower kit standard", price: 12.99 },
+  "400014559214": { name: "grow your own veg kit standard", price: 12.99 },
+  "400015559215": { name: "relax & grow standard", price: 12.99 },
+  "400016559216": { name: "easy grow starter kit standard", price: 12.99 },
+  "400017559217": { name: "windowsill garden kit standard", price: 12.99 },
+  "400018559218": { name: "sunflower smile kit standard", price: 12.99 },
+  "400019559219": { name: "mystery garden box standard", price: 12.99 },
+
+  /* Seasonal Edition */
+  "500001992014": { name: "christmas kitchen garden seasonal edition", price: 17.99 },
+  "500002992015": { name: "spring / easter seasonal edition", price: 17.99 },
+  "500003992016": { name: "mothers day seasonal edition", price: 17.99 },
+  "500004992017": { name: "fathers day seasonal edition", price: 17.99 },
+  "500005992018": { name: "summer seasonal edition", price: 17.99 },
+  "500006992019": { name: "halloween seasonal edition", price: 17.99 },
+  "500007992020": { name: "end of school seasonal edition", price: 17.99 },
+  "500008992021": { name: "teacher gifts seasonal edition", price: 17.99 },
+  "500009992022": { name: "valentines day seasonal edition", price: 17.99 },
+  "500010992023": { name: "birthday edition seasonal edition", price: 17.99 },
+  "500011992024": { name: "eco / sustainability theme seasonal edition", price: 17.99 },
+  "500012992025": { name: "kitchen garden kit seasonal edition", price: 17.99 },
+  "500013992026": { name: "bee friendly flower kit seasonal edition", price: 17.99 },
+  "500014992027": { name: "grow your own veg kit seasonal edition", price: 17.99 },
+  "500015992028": { name: "relax & grow seasonal edition", price: 17.99 },
+  "500016992029": { name: "easy grow starter kit seasonal edition", price: 17.99 },
+  "500017992030": { name: "windowsill garden kit seasonal edition", price: 17.99 },
+  "500018992031": { name: "sunflower smile kit seasonal edition", price: 17.99 },
+  "500019992032": { name: "mystery garden box seasonal edition", price: 17.99 },
+
+  /* Premium Personalised */
+  "600001551203": { name: "christmas kitchen garden premium personalised", price: 22.0 },
+  "600002551204": { name: "spring / easter premium personalised", price: 22.0 },
+  "600003551205": { name: "mothers day premium personalised", price: 22.0 },
+  "600004551206": { name: "fathers day premium personalised", price: 22.0 },
+  "600005551207": { name: "summer premium personalised", price: 22.0 },
+  "600006551208": { name: "halloween premium personalised", price: 22.0 },
+  "600007551209": { name: "end of school premium personalised", price: 22.0 },
+  "600008551210": { name: "teacher gifts premium personalised", price: 22.0 },
+  "600009551211": { name: "valentines day premium personalised", price: 22.0 },
+  "600010551212": { name: "birthday edition premium personalised", price: 22.0 },
+  "600011551213": { name: "eco / sustainability theme premium personalised", price: 22.0 },
+  "600012551214": { name: "kitchen garden kit premium personalised", price: 22.0 },
+  "600013551215": { name: "bee friendly flower kit premium personalised", price: 22.0 },
+  "600014551216": { name: "grow your own veg kit premium personalised", price: 22.0 },
+  "600015551217": { name: "relax & grow premium personalised", price: 22.0 },
+  "600016551218": { name: "easy grow starter kit premium personalised", price: 22.0 },
+  "600017551219": { name: "windowsill garden kit premium personalised", price: 22.0 },
+  "600018551220": { name: "sunflower smile kit premium personalised", price: 22.0 },
+  "600019551221": { name: "mystery garden box premium personalised", price: 22.0 }
+};
+  
+  let cart = [];
 let barcodeVisible = false;
 let lastBarcode = null;
 
